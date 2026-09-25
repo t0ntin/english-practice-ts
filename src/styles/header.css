@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* list-style: none; */
+  /* outline: 1px solid red; */
+}
+
+*::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --MAIN-BACKGROUND: #0e0e0e;
+  --SECONDARY-BACKGROUND: #171717;
+  --MAIN-COLOR: rgb(14, 162, 199);
+  --NORMAL-TEXT: rgb(174, 174, 174);
+  --BOX-SHADOW-1: 1px 1px 10px rgb(79, 79, 79);
+  --COMMON-ERRORS-BLUE: rgb(0, 50, 175);
+  --COMMON-ERRORS-BLUE-LIGHTER: rgb(22, 88, 255);
+  --COMMON-ERRORS-BLUE-EVEN-LIGHTER: rgb(80, 129, 255);
+  --BOX-SHADOW-TWO: 2px 5px 10px rgba(127, 127, 127, 0.45);
+  --TABLE-BACKGROUND-COLOR: rgb(99, 0, 0);
+  --LIGHT-GRAY:rgb(97, 97, 97);
+}
+
+html {
+  /* height: 100%; */
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background-color: rgb(19, 19, 19);
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  color: white;
+}
+
+/* USEFUL FOR DE-BUGGING AFTER A HORIZONTAL SCROLL BAR APPEARS FOR NO APPARENT REASON */
+/* body, html {
+  overflow-x: hidden;
+} */
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* This makes images responsive */
+  max-inline-size: 100%; 
+}
+
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--MAIN-BACKGROUND);
+}
+
+.header {
+  border: 1px solid red;
+  width: fit-content;
+  visibility: hidden;
+  /* display: none; */
+  pointer-events: none;
+  position: fixed;
+  z-index: 2;
+  transition: transform 0.2s ease-in-out;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.header.visible-header {
+  visibility: visible;
+  /* transition: transform 0.2s ease-in-out; */
+  transform: scale(1);
+  /* display: block; */
+  pointer-events: auto;
+}
+
+
+
+li {
+  max-width: fit-content;
+}
+
+button {
+    padding: 5px 8px;
+  border: none;
+  border-radius: 8px;
+  background-color:  var(--COMMON-ERRORS-BLUE);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease,
+    background-color 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus-visible {
+  outline: 2px solid #6aa8ff;
+  outline-offset: 2px;
+}
+
+.ul-element {
+  /* display: flex;
+  flex-direction: column;
+  gap: 8px; */
+  list-style: square;
+}
+
+.grammar-li, .pronunciation-li, .word-order-li, .basic-li {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.menu-button {
+  width: 35px;
+  height: 40px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+  background-color: var(--SECONDARY-BACKGROUND);
+  box-shadow: 4px 4px 10px var(--COMMON-ERRORS-BLUE-LIGHTER);
+
+  background-image:
+    linear-gradient(var(--COMMON-ERRORS-BLUE-LIGHTER), var(--COMMON-ERRORS-BLUE-LIGHTER)),
+    linear-gradient(var(--COMMON-ERRORS-BLUE-LIGHTER), var(--COMMON-ERRORS-BLUE-LIGHTER)),
+    linear-gradient(var(--COMMON-ERRORS-BLUE-LIGHTER), var(--COMMON-ERRORS-BLUE-LIGHTER));
+  background-size: 20px 2px;
+  background-position: center 11px, center 19px, center 27px;
+  background-repeat: no-repeat;
+}
+
+
+.overlay {
+  visibility: hidden;
+  pointer-events: none;
+  /* display: none; */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  transition: transform 0.2s ease-in-out;
+  transform: scale(0);
+  transform-origin: center;
+  opacity: 0;
+}
+
+.overlay.visible-overlay {
+  width: 100vw;
+  height: 100vh;
+  visibility: visible;
+  pointer-events: auto;
+  /* display: block; */
+  transform: scale(1);
+  opacity: .6;
+  background-color: black;
+}
