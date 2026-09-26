@@ -1,6 +1,8 @@
-import { headerData} from "../data/header-data"
 import { makeElement, renderTopic, select, toggleHeaderAndOverlay, transitionContent } from "../utils/helpers"
-import { suggestData } from "./suggest";
+import { adviceData } from "../data/advice-data";
+import { suggestData } from "../data/suggest-data";
+import { renderPracticeSection, renderSentences } from "./practice";
+import { renderQuestions } from "./questions";
 // import { renderSuggestions } from "./suggest";
 
 export let sentences = [
@@ -18,9 +20,6 @@ if (localStorageSentences) {
 }
 
 export const renderHeader = () => {
-  // const header = select('.header');
-  // const nav = select('.nav');
-    // const practiceLi = select('.practice-li');
 
     const practiceButton = select('.practice-button');
     practiceButton.addEventListener('click', handlePracticeButtonClick);
@@ -90,12 +89,17 @@ export const renderHeader = () => {
   overlay.addEventListener('click', toggleHeaderAndOverlay);
 
   renderTopic(suggestData);
-  
 }
 
 
 const handlePracticeButtonClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay()
+  renderPracticeSection();
+  sentences.forEach(sentence => {
+    if (!sentence.isArchived) {
+      renderSentences(sentence);
+    }
+  })
 }
 
 const handleMenuButtonClick = () => {
@@ -113,7 +117,8 @@ const handleSuggestClick = () => {
 }
 
 const handleAdviceClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderTopic(adviceData);
 }
 
 const handleConjugationClick = () => {
@@ -133,7 +138,8 @@ const handleModalsClick = () => {
 }
 
 const handleQuestionsClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderQuestions();
 }
 
 const handleDoDoesClick = () => {
@@ -177,25 +183,5 @@ const handleToBeClick = () => {
   console.log('test');
 }
 
-
-
 const handleOverlayClick = () => {
 }
-
-
-// const handleMenuButtonClick = () => {
-//     const headerEl = select('.header');
-//   headerEl.classList.toggle('active-aside');
-//   let overlay2El = select('.overlay-2');
-//   if (!overlay2El) {
-//     overlay2El = makeElement('div', 'overlay-2', document.body, '', handleOverlay2Click);
-//   }
-//     overlay2El.classList.toggle('active-overlay-2');
-// }
-
-// const handleOverlay2Click = (event) => {
-//   const asideEl = select('.aside');
-//   event.target.classList.toggle('active-overlay-2');
-//   asideEl.classList.toggle('active-aside');
-// }
-

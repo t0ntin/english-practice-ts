@@ -1,8 +1,9 @@
+import { sentences } from "../sections/header";
 import type { SuggestTopic } from "../types/types";
 
-export const select = (className: string) => {
-  const element = document.querySelector(className) as HTMLElement;
-  return element;
+
+export const select = <T extends HTMLElement>(className: string) => {
+  return document.querySelector(className) as T;
 }
 
 export const makeElement = (
@@ -12,7 +13,7 @@ export const makeElement = (
   textInside?: string,
   listenerFunctionName?: () => void
   ) => {
-  const element = document.createElement(elementTag);
+  let element = document.createElement(elementTag);
   element.classList.add(className);
   if (appendToEl) appendToEl.append(element);
   if (textInside) element.innerText = textInside;
@@ -21,7 +22,7 @@ export const makeElement = (
   return element;
 }
 
-export const  makeInputEl =(
+export const  makeInputEl = (
   className: string, 
   appendToEl: HTMLElement, 
   placeholder?:string, 
@@ -36,9 +37,23 @@ export const  makeInputEl =(
   return element;
 }
 
+export const makeTextArea = (
+  className:string,
+  appendToEl: HTMLElement,
+  placeholder?: string,
+  value?: string
+  ) => {
+  const element = document.createElement('textarea');
+  element.classList.add(className);
+  if (appendToEl) appendToEl.append(element);
+  if (placeholder) element.setAttribute('placeholder', placeholder);
+  if (value) element.setAttribute('value', value);
+  return element;
+}
+
 export const  renderTopic = (data: SuggestTopic[]) => {
   const contentSection = select('.content-section');
-
+  contentSection.innerHTML = '';
     const titleEl = makeElement('h2', 'title', contentSection, data[0]!.title);
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
     const incorrectTitle = makeElement('h3', 'incorrect-title', incorrectEl, 'Incorrect');
@@ -78,7 +93,6 @@ const handleAddToPracticeClick = (practiceSentence:object) => {
 }
 
 export const toggleHeaderAndOverlay = () => {
-  // const button = event.target as HTMLElement;
   const overlay = select('.overlay');
   const header = select('.header');
   overlay.classList.toggle('visible-overlay');
@@ -94,3 +108,86 @@ export const transitionContent = (element: HTMLElement, class1: string, class2: 
   }, 200);
 }
 
+export const showNotification = (message: string, containingElement:HTMLElement, top: number, left: number) => {
+  let popupEl = select('.popup-div');
+  if (!popupEl) {
+    popupEl = makeElement('div', 'popup-div', containingElement);
+  }
+  if (top) {
+    popupEl.style.top = `${top}%`;
+  }
+
+  if (left) {
+    popupEl.style.left = `${left}%`;
+  }
+  popupEl.innerText = message;
+  popupEl.classList.add('active-popup'); 
+  setTimeout(() => {
+    popupEl.classList.remove('active-popup'); 
+  }, 2000);
+}
+
+export const shuffleArray = (array: object[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i]!, array[j]!] = [array[j]!, array[i]!];
+  }
+}
+
+export const saveToLocalStorage = () => {
+  localStorage.setItem('sentences', JSON.stringify(sentences));
+}
+
+let selectedVoice: SpeechSynthesisVoice | null | undefined = null;
+
+export function loadBestVoice() {
+    const voices = speechSynthesis.getVoices();
+  // console.log('test');
+    const preferred = [
+        "Microsoft Jenny",
+        "Microsoft Aria",
+        "Microsoft Guy",
+        "Google UK English Female",
+        "Google US English",
+        "Google UK English Male",
+        "Samantha",
+        "Karen",
+        "Daniel"
+    ];
+
+    // Try preferred voices first
+    for (const name of preferred) {
+        const voice = voices.find(v => v.name.includes(name));
+        if (voice) {
+            selectedVoice = voice;
+            console.log(typeof selectedVoice);
+            console.log('est');
+            return;
+        }
+    }
+
+    // Any English female voice
+    selectedVoice = voices.find(v =>
+        v.lang.startsWith("en") &&
+        /female|woman|samantha|karen|jenny|aria/i.test(v.name)
+    );
+    if (selectedVoice) return;
+    
+    // Any English voice
+    selectedVoice = voices.find(v => v.lang.startsWith("en"));
+        if (selectedVoice) return;
+
+    // Fallback
+    selectedVoice = voices[0];
+}
+
+// Chrome loads voices asynchronously
+speechSynthesis.onvoiceschanged = loadBestVoice;
+
+export function speak(text: string) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = selectedVoice!;
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    speechSynthesis.speak(utterance);
+}

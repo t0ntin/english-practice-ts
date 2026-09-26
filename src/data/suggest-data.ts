@@ -1,6 +1,4 @@
 import type { SuggestTopic } from "../types/types";
-import { makeElement, renderTopic, toggleHeaderAndOverlay } from "../utils/helpers";
-
 
 export const suggestData: SuggestTopic[] = [
     {
@@ -29,5 +27,3 @@ export const suggestData: SuggestTopic[] = [
   },
 ]
 
-
-renderTopic(suggestData);

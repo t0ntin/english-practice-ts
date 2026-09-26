@@ -1,9 +1,3 @@
-import { makeElement } from "../utils/helpers";
-
-const renderAdvice = () => {
-
-}
-
 export const adviceData = [
   {
     title: "Advice",

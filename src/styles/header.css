@@ -186,3 +186,29 @@ button:focus-visible {
   opacity: .6;
   background-color: black;
 }
+
+.popup-div {
+  width: 200px;
+  height: 100px;
+  background-color: var(--SECONDARY-BACKGROUND);
+  border: 1px solid white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+  color: white;
+  font-weight: bold;
+
+}
+
+.popup-div.active-popup {
+  opacity: 1;
+  visibility: visible;
+}
