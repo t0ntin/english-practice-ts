@@ -1,10 +1,23 @@
-import { makeElement, makeInputEl, makeTextArea, saveToLocalStorage, select, shuffleArray, speak } from "../utils/helpers";
-import { sentences } from "./header";
+import { makeElement, makeInputEl, makeTextArea, saveToLocalStorage, sel, shuffleArray, speak } from "../utils/helpers";
+// import { sentences } from "./header";
 import type { SentenceObj } from "../types/types";
 let activeView = true;
 
+export let sentences = [
+  {  
+    sentence: "My test sentence", 
+    translation: "Mi oracion de prueba",
+    isArchived: false,
+  },
+];
+const localStorageSentences = localStorage.getItem('sentences');
+
+if (localStorageSentences) {
+  sentences = JSON.parse(localStorageSentences);
+}
+
 export const renderPracticeSection = () => {
-    const contentSection = select('.content-section') as HTMLElement;
+    const contentSection = sel('.content-section') as HTMLElement;
     contentSection.innerHTML = '';
   const containerForInputEls = makeElement('div', 'container-for-top-controls', contentSection);
   containerForInputEls.innerHTML = '';
@@ -27,9 +40,9 @@ export const renderPracticeSection = () => {
 }
 
 const handleAddClick = () => {
-  const singleEnglishSentenceEl = select<HTMLInputElement>('.single-english-sentence-input-element');
+  const singleEnglishSentenceEl = sel<HTMLInputElement>('.single-english-sentence-input-element');
 
-  const singleSpanishTranslationEl = select<HTMLInputElement>('.single-spanish-translation-input-element');
+  const singleSpanishTranslationEl = sel<HTMLInputElement>('.single-spanish-translation-input-element');
 
   if (singleEnglishSentenceEl.value === '' || singleSpanishTranslationEl.value === '') {
     return
@@ -48,9 +61,9 @@ const handleAddClick = () => {
 }
 
 const changeView = () => {
-  const showArchiveButton = select('.show-archive-button');
-  const showActiveButton = select('.show-active-button');
-  const shuffleSentencesButton = select<HTMLButtonElement>('.shuffle-sentences-button');
+  const showArchiveButton = sel('.show-archive-button');
+  const showActiveButton = sel('.show-active-button');
+  const shuffleSentencesButton = sel<HTMLButtonElement>('.shuffle-sentences-button');
   console.log(shuffleSentencesButton instanceof HTMLButtonElement);
   if (!activeView) {
     showArchiveButton.classList.add('active');
@@ -67,8 +80,8 @@ const changeView = () => {
 }
 
 const handleShowArchive = () => {
-  const sentencesContainerOne = select('.sentences-container-one');
-  const shuffleSentencesButton = select('.shuffle-sentences-button');
+  const sentencesContainerOne = sel('.sentences-container-one');
+  const shuffleSentencesButton = sel('.shuffle-sentences-button');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (sentence.isArchived) {
@@ -80,8 +93,8 @@ const handleShowArchive = () => {
 };
 
 const handleShowActive = () => {
-  const sentencesContainerOne = select('.sentences-container-one');
-  const shuffleSentencesButton = select('.shuffle-sentences-button');
+  const sentencesContainerOne = sel('.sentences-container-one');
+  const shuffleSentencesButton = sel('.shuffle-sentences-button');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {
@@ -96,7 +109,7 @@ const handleShowActive = () => {
 const handleShuffleClick = () => {
   shuffleArray(sentences)
   saveToLocalStorage();
-  const sentencesContainerOne = select('.sentences-container-one');
+  const sentencesContainerOne = sel('.sentences-container-one');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {
@@ -115,7 +128,7 @@ const transitionContainer = (sentencesContainerOne: HTMLDivElement) =>{
 }
 
 export const renderSentences = (sentence: SentenceObj) => {
-  const sentencesContainerOne = select<HTMLDivElement>('.sentences-container-one');
+  const sentencesContainerOne = sel<HTMLDivElement>('.sentences-container-one');
     transitionContainer(sentencesContainerOne);
   const containerOne =  makeElement('div', 'container-one', sentencesContainerOne);
     const topRowContainer =  makeElement('div', 'top-row-container', containerOne);

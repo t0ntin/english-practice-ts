@@ -1,7 +1,7 @@
-import type { SuggestTopic } from "../types/types";
+import type { CommonErrorsObj } from "../types/types";
 
-export const suggestData: SuggestTopic[] = [
-    {
+export const suggestData: CommonErrorsObj[] = [
+  {
     title: "Suggest and recommend",
     incorrect: ['I suggest you the sushi.', 'I suggest you to eat sushi.', 'I suggest to find a new job.', 'What do you suggest me?'],
     correct: ['I suggest the sushi.', 'I suggest eating sushi.', 'I suggest (that) you eat the sushi.', 'What do you suggest?'],

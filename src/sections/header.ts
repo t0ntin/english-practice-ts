@@ -1,96 +1,85 @@
-import { makeElement, renderTopic, select, toggleHeaderAndOverlay, transitionContent } from "../utils/helpers"
+import { makeElement, renderTopic, sel, toggleHeaderAndOverlay, transitionContent } from "../utils/helpers"
 import { adviceData } from "../data/advice-data";
 import { suggestData } from "../data/suggest-data";
-import { renderPracticeSection, renderSentences } from "./practice";
+import { sentences, renderPracticeSection, renderSentences } from "./practice";
 import { renderQuestions } from "./questions";
-// import { renderSuggestions } from "./suggest";
-
-export let sentences = [
-  {  
-    sentence: "My test sentence", 
-    translation: "Mi oracion de prueba",
-    isArchived: false,
-  },
-];
-
-const localStorageSentences = localStorage.getItem('sentences');
-
-if (localStorageSentences) {
-  sentences = JSON.parse(localStorageSentences);
-}
+import { conjugationData } from "./conjugation";
+import { objectPlusInfData } from "./object-plus-inf";
+import { toHaveData } from "./to-have";
+import { modalsData } from "./modals";
+import { renderPast } from "./the-past";
 
 export const renderHeader = () => {
 
-    const practiceButton = select('.practice-button');
-    practiceButton.addEventListener('click', handlePracticeButtonClick);
-    const grammarButton = select('.grammar-button');
-      grammarButton.addEventListener('click', handleGrammarClick);
+  const practiceButton = sel('.practice-button');
+  practiceButton.addEventListener('click', handlePracticeButtonClick);
+  const grammarButton = sel('.grammar-button');
+    grammarButton.addEventListener('click', handleGrammarClick);
 
-      const suggestLi = select('.suggest-recommend-li');
-      const suggestButton = makeElement('button', 'suggestions-button', suggestLi, 'Suggestions', handleSuggestClick);
+    const suggestLi = sel('.suggest-recommend-li');
+    const suggestButton = makeElement('button', 'suggestions-button', suggestLi, 'Suggestions', handleSuggestClick);
 
-      const adviceLi = select('.advice-li');
-      const adviceButton = makeElement('button', 'advice-button', adviceLi, 'Advice', handleAdviceClick);
+    const adviceLi = sel('.advice-li');
+    const adviceButton = makeElement('button', 'advice-button', adviceLi, 'Advice', handleAdviceClick);
 
-      const conjugationLi = select('.conjugation-li');
-      const conjugationButton = makeElement('button', 'conjugation-button', conjugationLi, 'Conjugation', handleConjugationClick);
+    const conjugationLi = sel('.conjugation-li');
+    const conjugationButton = makeElement('button', 'conjugation-button', conjugationLi, 'Conjugation', handleConjugationClick);
 
-      const objectplusinfLi = select('.objectplusinf-li');
-      const objectPlusInfButton = makeElement('button', 'objectplusinf-button', objectplusinfLi, 'Object + inf.', handleObjectPlusInfClick);
+    const objectplusinfLi = sel('.objectplusinf-li');
+    const objectPlusInfButton = makeElement('button', 'objectplusinf-button', objectplusinfLi, 'Object + inf.', handleObjectPlusInfClick);
 
-      const toHaveLi = select('.to-have-li');
-      const toHaveButton = makeElement('button', 'to-have-button', toHaveLi, 'To have', handleToHaveClick);
+    const toHaveLi = sel('.to-have-li');
+    const toHaveButton = makeElement('button', 'to-have-button', toHaveLi, 'To have', handleToHaveClick);
 
-      const modalsLi = select('.modals-li');
-      const modalsButton = makeElement('button', 'modals-button', modalsLi, 'Modals', handleModalsClick);
+    const modalsLi = sel('.modals-li');
+    const modalsButton = makeElement('button', 'modals-button', modalsLi, 'Modals', handleModalsClick);
 
-      const questionsLi = select('.questions-li');
-      const questionsButton = makeElement('button', 'questions-button', questionsLi, 'Questions', handleQuestionsClick);
+    const questionsLi = sel('.questions-li');
+    const questionsButton = makeElement('button', 'questions-button', questionsLi, 'Questions', handleQuestionsClick);
 
-      const pastLi = select('.past-li');
-      const pastButton = makeElement('button', 'past-button', pastLi, 'The Past', handlePastClick);
+    const pastLi = sel('.past-li');
+    const pastButton = makeElement('button', 'past-button', pastLi, 'The Past', handlePastClick);
 
-      const doDoesLi = select('.do-does-li');
-      const doDoesButton = makeElement('button', 'do-does-button', doDoesLi, 'Do-Does', handleDoDoesClick);
+    const doDoesLi = sel('.do-does-li');
+    const doDoesButton = makeElement('button', 'do-does-button', doDoesLi, 'Do-Does', handleDoDoesClick);
 
-    
-    const pronunciationLi = select('.pronunciation-li');
-      const pronunciationButton = select('.pronunciation-button');
-      pronunciationButton.addEventListener('click', handlePronunciationClick);
+  
+  const pronunciationLi = sel('.pronunciation-li');
+    const pronunciationButton = sel('.pronunciation-button');
+    pronunciationButton.addEventListener('click', handlePronunciationClick);
 
-      // const pronunciationUl = select('.pronunciation-ul');
-      const regVerbsLi = select('.reg-verbs-li');
-        const regVerbsButton = makeElement('button', 'reg-verbs-button', regVerbsLi, 'Reg. verbs', handleRegVerbsClick);
+    // const pronunciationUl = select('.pronunciation-ul');
+    const regVerbsLi = sel('.reg-verbs-li');
+      const regVerbsButton = makeElement('button', 'reg-verbs-button', regVerbsLi, 'Reg. verbs', handleRegVerbsClick);
 
-      const sWordsLi = select('.s-words-li');
-        const sWordsButton = makeElement('button', 's-words-button', sWordsLi, 'S-words', handleSWordsClick);
+    const sWordsLi = sel('.s-words-li');
+      const sWordsButton = makeElement('button', 's-words-button', sWordsLi, 'S-words', handleSWordsClick);
 
-      const pluralsLi = select('.plurals-li');
-        const pluralsButton = makeElement('button', 'plurals-button', pluralsLi, 'Plurals', handlePluralsClick);
+    const pluralsLi = sel('.plurals-li');
+      const pluralsButton = makeElement('button', 'plurals-button', pluralsLi, 'Plurals', handlePluralsClick);
 
-    const wordORderLi = select('.word-order-li');
-      const wordORderButton = select('.word-order-button');
-      wordORderButton.addEventListener('click', handleWordOrderClick);
-      const svoLi = select('.svo-li');
-        const svoButton = makeElement('button', 'svo-button', svoLi, 'S.V.O', handleSvoClick);
+  const wordORderLi = sel('.word-order-li');
+    const wordORderButton = sel('.word-order-button');
+    wordORderButton.addEventListener('click', handleWordOrderClick);
+    const svoLi = sel('.svo-li');
+      const svoButton = makeElement('button', 'svo-button', svoLi, 'S.V.O', handleSvoClick);
 
 
-    const basicLi = select('.basic-li');
-      const basicButton = select('.basic-button');
-      basicButton.addEventListener('click', handleBasicClick);
-      const toBeLi = select('.to-be-li');
-        const toBeButton = makeElement('button', 'to-be-button', toBeLi, 'To be', handleToBeClick);
+  const basicLi = sel('.basic-li');
+    const basicButton = sel('.basic-button');
+    basicButton.addEventListener('click', handleBasicClick);
+    const toBeLi = sel('.to-be-li');
+      const toBeButton = makeElement('button', 'to-be-button', toBeLi, 'To be', handleToBeClick);
 
-      const mainSection = select('.main-section');
-      const menuButton = makeElement('button', 'menu-button', mainSection, '', handleMenuButtonClick)
-        const contentSection = makeElement('div', 'content-section', mainSection);
+    const mainSection = sel('.main-section');
+    const menuButton = makeElement('button', 'menu-button', mainSection, '', handleMenuButtonClick)
+      const contentSection = makeElement('div', 'content-section', mainSection);
 
-  const overlay = select('.overlay');
+  const overlay = sel('.overlay');
   overlay.addEventListener('click', toggleHeaderAndOverlay);
 
   renderTopic(suggestData);
 }
-
 
 const handlePracticeButtonClick = () => {
   toggleHeaderAndOverlay()
@@ -122,19 +111,23 @@ const handleAdviceClick = () => {
 }
 
 const handleConjugationClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderTopic(conjugationData);
 }
 
 const handleObjectPlusInfClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderTopic(objectPlusInfData);
 }
 
 const handleToHaveClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderTopic(toHaveData);
 }
 
 const handleModalsClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderTopic(modalsData);
 }
 
 const handleQuestionsClick = () => {
@@ -147,7 +140,8 @@ const handleDoDoesClick = () => {
 }
 
 const handlePastClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderPast();
 }
 
 

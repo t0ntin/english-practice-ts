@@ -1,8 +1,8 @@
-import { sentences } from "../sections/header";
-import type { SuggestTopic } from "../types/types";
+import { sentences } from "../sections/practice";
+import type { CommonErrorsObj } from "../types/types";
 
 
-export const select = <T extends HTMLElement>(className: string) => {
+export const sel = <T extends HTMLElement>(className: string) => {
   return document.querySelector(className) as T;
 }
 
@@ -11,9 +11,9 @@ export const makeElement = (
   className: string,
   appendToEl: HTMLElement | null,
   textInside?: string,
-  listenerFunctionName?: () => void
+  listenerFunctionName?: (event: MouseEvent) => void
   ) => {
-  let element = document.createElement(elementTag);
+  let element = document.createElement(elementTag) as HTMLElement;
   element.classList.add(className);
   if (appendToEl) appendToEl.append(element);
   if (textInside) element.innerText = textInside;
@@ -51,8 +51,8 @@ export const makeTextArea = (
   return element;
 }
 
-export const  renderTopic = (data: SuggestTopic[]) => {
-  const contentSection = select('.content-section');
+export const  renderTopic = (data: CommonErrorsObj[]) => {
+  const contentSection = sel('.content-section');
   contentSection.innerHTML = '';
     const titleEl = makeElement('h2', 'title', contentSection, data[0]!.title);
   const incorrectEl = makeElement('div', 'incorrect-div', contentSection);
@@ -93,8 +93,8 @@ const handleAddToPracticeClick = (practiceSentence:object) => {
 }
 
 export const toggleHeaderAndOverlay = () => {
-  const overlay = select('.overlay');
-  const header = select('.header');
+  const overlay = sel('.overlay');
+  const header = sel('.header');
   overlay.classList.toggle('visible-overlay');
   header.classList.toggle('visible-header');
 }
@@ -109,7 +109,7 @@ export const transitionContent = (element: HTMLElement, class1: string, class2: 
 }
 
 export const showNotification = (message: string, containingElement:HTMLElement, top: number, left: number) => {
-  let popupEl = select('.popup-div');
+  let popupEl = sel('.popup-div');
   if (!popupEl) {
     popupEl = makeElement('div', 'popup-div', containingElement);
   }

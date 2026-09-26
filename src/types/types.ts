@@ -12,7 +12,9 @@ export type PracticeSentence = {
   spanish: string;
 };
 
-export type SuggestTopic = {
+// SUGGEST SECTION
+
+export type CommonErrorsObj = {
   title: string;
   incorrect: string[];
   correct: string[];
@@ -49,4 +51,24 @@ export type QuestionSet = {
     chunks: Chunk[];
   }
   questions: Question[];
+}
+
+// THE PAST SECTION
+
+export type PastFlags = {
+  currentStory: number,
+  currentSentence: number,
+}
+
+export type pastSentence = {
+  done: boolean;
+  toPractice: boolean;
+  spanish: string;
+  correct: string;
+  translations: string[];
+}
+
+export type PastStories = {
+  title: string;
+  sentences: pastSentence[];
 }

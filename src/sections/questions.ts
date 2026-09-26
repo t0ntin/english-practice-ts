@@ -1,12 +1,12 @@
-import { sentences } from "./header";
+import { sentences } from "./practice";
 import { questions, questionsFlags } from "../data/question-data";
-import { makeElement, makeInputEl, saveToLocalStorage, select, showNotification, transitionContent } from "../utils/helpers";
+import { makeElement, makeInputEl, saveToLocalStorage, sel, showNotification, transitionContent } from "../utils/helpers";
 
 
 export const  renderQuestions = () => {
   // flags.currentSection = "Common Errors"
   // toggleLinkStyles();
-  const contentSection = select('.content-section');
+  const contentSection = sel('.content-section');
   // transitionContent(contentSection, 'scale-up', 'scale-down');
   contentSection.innerHTML = '';
   const sentenceContainer = makeElement('div', 'sentence-container', contentSection);
@@ -39,11 +39,11 @@ export const  renderQuestions = () => {
 }
 
 const handleCheckSentenceClick = () => {
-  const contentSection = select('.content-section');
-  const correctSentenceContainer = select('.correct-sentence-container');
+  const contentSection = sel('.content-section');
+  const correctSentenceContainer = sel('.correct-sentence-container');
   correctSentenceContainer.innerHTML = '';
   
-  const inputEl = select<HTMLInputElement>('.sentence-input');
+  const inputEl = sel<HTMLInputElement>('.sentence-input');
   const currentQuestion = questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!;
 
   const cleanedInput = normalizeString(inputEl.value);
@@ -88,7 +88,7 @@ const handleNextButtonClick = () => {
 }
 
 const handleHint1Buttonclick = () => {
-  const correctSentenceContainer = select('.correct-sentence-container');
+  const correctSentenceContainer = sel('.correct-sentence-container');
   correctSentenceContainer.innerHTML = '';
   correctSentenceContainer.innerText = questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!.hint1;
   transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
@@ -96,21 +96,21 @@ const handleHint1Buttonclick = () => {
 }
 
 const handleHint2Buttonclick = () => {
-  const correctSentenceContainer = select('.correct-sentence-container');
+  const correctSentenceContainer = sel('.correct-sentence-container');
   correctSentenceContainer.innerHTML = '';
   correctSentenceContainer.innerText = questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!.hint2;
   transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
 }
 
 const handleShowAnswerButtonclick = () => {
-  const correctSentenceContainer = select('.correct-sentence-container');
+  const correctSentenceContainer = sel('.correct-sentence-container');
   correctSentenceContainer.innerHTML = '';
   correctSentenceContainer.innerText = questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!.text + '?';
   transitionContent(correctSentenceContainer, 'scale-up', 'scale-down');
 }
 
 const handleAddToPracticeButtonclick = () => {
-  const contentSection = select('.content-section')
+  const contentSection = sel('.content-section')
   const sentenceObj = {sentence: questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!.text + '?', translation: questions[questionsFlags.currentSentence]!.questions[questionsFlags.currentQuestion]!.hint2, isArchived: false};
   sentences.push(sentenceObj);
   saveToLocalStorage();
