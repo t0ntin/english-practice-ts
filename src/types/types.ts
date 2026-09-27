@@ -60,7 +60,7 @@ export type PastFlags = {
   currentSentence: number,
 }
 
-export type pastSentence = {
+export type PastSentence = {
   done: boolean;
   toPractice: boolean;
   spanish: string;
@@ -70,5 +70,40 @@ export type pastSentence = {
 
 export type PastStories = {
   title: string;
-  sentences: pastSentence[];
+  sentences: PastSentence[];
 }
+
+
+// DO-DOES SECTION
+
+export type DoDoesFlagsObj = {
+  lastSelectedElement: HTMLButtonElement |null;
+  // userAnswer:null,
+  currentSentenceIndex: number;
+  currentGroupIndex: number;
+  // chosenSentence: [],
+  correctAnswersCounter: number;
+}
+
+export type Spanish = {
+  text: string;
+  role: string;
+};
+
+export type English = {
+  text: string;
+  role: string;
+};
+
+export type DoDoesObj = {
+  key: string;
+  complete: string;
+  spanish: Spanish[];
+  english: English[];
+};
+
+export type DoDoesData = {
+  baseSentence: string;
+  phrases: DoDoesObj[];
+};
+

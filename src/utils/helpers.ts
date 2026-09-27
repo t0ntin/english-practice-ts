@@ -1,3 +1,4 @@
+import { showOverlay } from "../sections/header";
 import { sentences } from "../sections/practice";
 import type { CommonErrorsObj } from "../types/types";
 
@@ -6,14 +7,19 @@ export const sel = <T extends HTMLElement>(className: string) => {
   return document.querySelector(className) as T;
 }
 
-export const makeElement = (
+export const selAll = <T extends HTMLElement = HTMLElement>(selector: string): NodeListOf<T> => {
+  return document.querySelectorAll(selector) as NodeListOf<T>;
+};
+
+export const makeElement = <T extends HTMLElement = HTMLElement>(
   elementTag: string,
   className: string,
   appendToEl: HTMLElement | null,
   textInside?: string,
   listenerFunctionName?: (event: MouseEvent) => void
-  ) => {
-  let element = document.createElement(elementTag) as HTMLElement;
+  ): T => {
+  const element = document.createElement(elementTag) as T;
+  
   element.classList.add(className);
   if (appendToEl) appendToEl.append(element);
   if (textInside) element.innerText = textInside;
@@ -95,8 +101,8 @@ const handleAddToPracticeClick = (practiceSentence:object) => {
 export const toggleHeaderAndOverlay = () => {
   const overlay = sel('.overlay');
   const header = sel('.header');
-  overlay.classList.toggle('visible-overlay');
-  header.classList.toggle('visible-header');
+  header.classList.remove('visible-header');
+  overlay.classList.remove('visible-overlay');
 }
 
 export const transitionContent = (element: HTMLElement, class1: string, class2: string) => {

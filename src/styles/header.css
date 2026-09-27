@@ -137,6 +137,26 @@ button:focus-visible {
   flex-direction: column;
 }
 
+.content-section {
+  width: 100%;
+  padding: 10px 5px 10px 10px;
+  border-radius: 10px;
+  box-shadow:  var(--BOX-SHADOW-TWO);
+  background-color: rgb(19, 19, 19);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  transition: transform 0.3s ease;
+  overflow-x: hidden;
+}
+
+.content-section.scale-down {
+  transform: scale(0.9);
+}
+
+.content-section.scale-up {
+  transform: scale(1);
+}
 
 .menu-button {
   width: 35px;

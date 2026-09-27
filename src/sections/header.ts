@@ -8,6 +8,7 @@ import { objectPlusInfData } from "./object-plus-inf";
 import { toHaveData } from "./to-have";
 import { modalsData } from "./modals";
 import { renderPast } from "./the-past";
+import { renderDoDoes } from "./do-does";
 
 export const renderHeader = () => {
 
@@ -76,7 +77,7 @@ export const renderHeader = () => {
       const contentSection = makeElement('div', 'content-section', mainSection);
 
   const overlay = sel('.overlay');
-  overlay.addEventListener('click', toggleHeaderAndOverlay);
+  overlay.addEventListener('click', handleOverlayClick);
 
   renderTopic(suggestData);
 }
@@ -92,9 +93,20 @@ const handlePracticeButtonClick = () => {
 }
 
 const handleMenuButtonClick = () => {
-  toggleHeaderAndOverlay();
+  const overlay = sel('.overlay');
+  const header = sel('.header');
 
-}
+  if (header.classList.contains('visible-header')) {
+    header.classList.remove('visible-header');
+    overlay.classList.remove('visible-overlay');
+    return;
+  }
+
+  header.classList.add('visible-header');
+  showOverlay(() => {
+    header.classList.remove('visible-header');
+  });
+};
 
 const handleGrammarClick = () => {
   console.log('test');
@@ -136,7 +148,8 @@ const handleQuestionsClick = () => {
 }
 
 const handleDoDoesClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderDoDoes();
 }
 
 const handlePastClick = () => {
@@ -178,4 +191,14 @@ const handleToBeClick = () => {
 }
 
 const handleOverlayClick = () => {
+  const overlay = sel('.overlay');
+  overlay.classList.remove('visible-overlay');
+  onOverlayClose();
+}
+
+let onOverlayClose: () => void = () => {};
+export function showOverlay(closeAction: () => void) {
+  const overlay = sel('.overlay');
+  onOverlayClose = closeAction;
+  overlay.classList.add('visible-overlay');
 }
