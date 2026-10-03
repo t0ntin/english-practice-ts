@@ -1,4 +1,6 @@
-export const adviceData = [
+import type { CommonErrorsObj } from "../types/types";
+
+export const adviceData: CommonErrorsObj[] = [
   {
     title: "Advice",
     incorrect: ['Can you give me an advice?', 'Can you give me some advices?', 'Let me give you an advice.'],

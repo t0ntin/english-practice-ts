@@ -133,3 +133,10 @@ export type SWordsObj = {
   "step": string;
   "practiceContent": string[];
 }
+
+// PLURALS 
+
+export type PluralsObj = {
+  "step": string;
+  "practiceContent": string[] | string[][];
+}

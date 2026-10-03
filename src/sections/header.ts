@@ -11,6 +11,7 @@ import { renderPast } from "./the-past";
 import { renderDoDoes } from "./do-does";
 import { renderRegVerbs } from "./reg-verbs";
 import { renderSWords } from "./s-words";
+import { renderPlurals } from "./plurals";
 
 export const renderHeader = () => {
 
@@ -159,7 +160,6 @@ const handlePastClick = () => {
   renderPast();
 }
 
-
 const handlePronunciationClick = () => {
   console.log('test');
 }
@@ -175,7 +175,8 @@ const handleSWordsClick = () => {
 }
 
 const handlePluralsClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderPlurals();
 }
 
 const handleWordOrderClick = () => {
