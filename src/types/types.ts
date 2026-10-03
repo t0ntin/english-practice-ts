@@ -107,3 +107,22 @@ export type DoDoesData = {
   phrases: DoDoesObj[];
 };
 
+
+// REGVERBS SECTION
+
+export type RegVerbFlags = {
+  currentVerbCommon: number;
+  currentVerbUncommon: number;
+  currentVerbGroup: string;
+}
+
+export type VerbGroup = {
+  mainVerbs1?: string[];
+  mainVerbs2?: string[];
+  commonVerbs?: string[];
+  uncommonVerbs?: string[];
+}
+
+export type AllVerbsObj = {
+  [verb: string]: string[];
+};

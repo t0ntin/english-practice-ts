@@ -9,6 +9,7 @@ import { toHaveData } from "./to-have";
 import { modalsData } from "./modals";
 import { renderPast } from "./the-past";
 import { renderDoDoes } from "./do-does";
+import { renderRegVerbs } from "./reg-verbs";
 
 export const renderHeader = () => {
 
@@ -163,7 +164,8 @@ const handlePronunciationClick = () => {
 }
 
 const handleRegVerbsClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderRegVerbs();
 }
 
 const handleSWordsClick = () => {
