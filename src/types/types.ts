@@ -126,3 +126,10 @@ export type VerbGroup = {
 export type AllVerbsObj = {
   [verb: string]: string[];
 };
+
+// S-WORDS
+
+export type SWordsObj = {
+  "step": string;
+  "practiceContent": string[];
+}

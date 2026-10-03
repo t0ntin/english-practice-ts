@@ -10,6 +10,7 @@ import { modalsData } from "./modals";
 import { renderPast } from "./the-past";
 import { renderDoDoes } from "./do-does";
 import { renderRegVerbs } from "./reg-verbs";
+import { renderSWords } from "./s-words";
 
 export const renderHeader = () => {
 
@@ -169,7 +170,8 @@ const handleRegVerbsClick = () => {
 }
 
 const handleSWordsClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderSWords();
 }
 
 const handlePluralsClick = () => {

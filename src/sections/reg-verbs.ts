@@ -111,6 +111,17 @@ const initialize = () => {
       if (!mobileDragging || event.pointerType !== 'touch') {
         return;
       }
+      // Scroll down or up when dragging element.
+      const scrollZone = 100;
+      const scrollSpeed = 5;
+
+      if (event.clientY > window.innerHeight - scrollZone) {
+        window.scrollBy(0, scrollSpeed);
+      }
+
+      if (event.clientY < scrollZone) {
+        window.scrollBy(0, -scrollSpeed);
+      }
       // Move the visual copy with the finger
       if (dragGhost) {
         dragGhost.style.left = `${event.clientX}px`;
@@ -320,7 +331,6 @@ console.table(
 
 const saveRegVerFlagsToLocalStorage = () => {
   localStorage.setItem('regVerbFlags', JSON.stringify(regVerbFlags));
-
 }
 
 const underlineLastConsonant = (verbEl: HTMLSpanElement) => {
