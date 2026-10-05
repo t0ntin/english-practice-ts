@@ -1,5 +1,5 @@
-import { pluralsData } from "../data/plurals-data.js";
-import { makeElement, sel, speak, transitionContent } from "../utils/helpers.js";
+import { pluralsData } from "../../data/plurals-data.js";
+import { makeElement, sel, speak, transitionContent } from "../../utils/helpers.js";
 
 
 export const renderPlurals = () => {
@@ -19,7 +19,9 @@ export const renderPlurals = () => {
   const listLi = makeElement('li', 'list-li', listOl);
     const listStepEl = makeElement('p', 'list-step', listLi, pluralsData[0]!.step);
     pluralsData[0]!.practiceContent.forEach(pair => {
-      const pairButton = makeElement('button', 'pair-button', listLi, pair, handlePairButtonClick)
+      const text = Array.isArray(pair) ? pair.join(', ') : pair;
+      makeElement('button', 'pair-button', listLi, text, handlePairButtonClick);
+      const pairButton = makeElement('button', 'pair-button', listLi, text, handlePairButtonClick)
     })
   pluralsData.slice(1).forEach(element => {
     const listLi = makeElement('li', 'list-li', listOl);

@@ -1,5 +1,5 @@
-import { allVerbs, regVerbData, regVerbFlags as importedRegVerbFlags } from "../data/reg-verbs-data";
-import { sel, makeElement, speak, showNotification } from "../utils/helpers";
+import { allVerbs, regVerbData, regVerbFlags as importedRegVerbFlags } from "../../data/reg-verbs-data";
+import { sel, makeElement, speak, showNotification } from "../../utils/helpers";
 
 let regVerbFlags = {...importedRegVerbFlags};
 const localStorageRegVerbData = localStorage.getItem('regVerbFlags')

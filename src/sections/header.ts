@@ -2,16 +2,17 @@ import { makeElement, renderTopic, sel, toggleHeaderAndOverlay, transitionConten
 import { adviceData } from "../data/advice-data";
 import { suggestData } from "../data/suggest-data";
 import { sentences, renderPracticeSection, renderSentences } from "./practice";
-import { renderQuestions } from "./questions";
-import { conjugationData } from "./conjugation";
-import { objectPlusInfData } from "./object-plus-inf";
-import { toHaveData } from "./to-have";
-import { modalsData } from "./modals";
-import { renderPast } from "./the-past";
-import { renderDoDoes } from "./do-does";
-import { renderRegVerbs } from "./reg-verbs";
-import { renderSWords } from "./s-words";
-import { renderPlurals } from "./plurals";
+import { renderQuestions } from "./grammar/questions";
+import { conjugationData } from "../data/conjugation-data";
+import { objectPlusInfData } from "../data/object-plus-inf";
+import { toHaveData } from "../data/to-have-data";
+import { modalsData } from "../data/modals-data";
+import { renderPast } from "./grammar/the-past";
+import { renderDoDoes } from "./grammar/do-does";
+import { renderRegVerbs } from "./pronunciation/reg-verbs";
+import { renderSWords } from "./pronunciation/s-words";
+import { renderPlurals } from "./pronunciation/plurals";
+import { renderSvo } from "./svo";
 
 export const renderHeader = () => {
 
@@ -184,7 +185,8 @@ const handleWordOrderClick = () => {
 }
 
 const handleSvoClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderSvo();
 }
 
 const handleBasicClick = () => {

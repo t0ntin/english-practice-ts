@@ -140,3 +140,24 @@ export type PluralsObj = {
   "step": string;
   "practiceContent": string[] | string[][];
 }
+
+// SVO
+
+export type SvoFlags = {
+  chosenSentence: { text: string; color: string }[];
+  currentSentenceIndex: number;
+  currentGroupIndex: number;
+  correctAnswersCounter: number;
+}
+
+export type SvoSentenceObj = {
+  words: SvoWord[],
+  correct: boolean,
+}
+
+export type SvoWord = {
+  text: string,
+  color: string,
+}
+
+export type SvoSentenceGroup = SvoSentenceObj[][]

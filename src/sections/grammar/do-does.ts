@@ -1,7 +1,7 @@
-import { makeElement, makeInputEl, sel, selAll } from "../utils/helpers";
-import { hints, validSentences } from "../data/do-does-data";
-import type { DoDoesObj } from "../types/types";
-import { showOverlay } from "./header";
+import { makeElement, makeInputEl, sel, selAll } from "../../utils/helpers";
+import { hints, validSentences } from "../../data/do-does-data";
+import type { DoDoesObj } from "../../types/types";
+import { showOverlay } from "../header";
 
 // For draggable cover:
 let isDragging: boolean = false;

@@ -1,5 +1,5 @@
-import { sWordsData } from "../data/s-words-data";
-import { makeElement, sel, speak, transitionContent } from "../utils/helpers";
+import { sWordsData } from "../../data/s-words-data";
+import { makeElement, sel, speak, transitionContent } from "../../utils/helpers";
 
 
 export const renderSWords = () => {

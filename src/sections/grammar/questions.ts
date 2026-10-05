@@ -1,6 +1,6 @@
-import { sentences } from "./practice";
-import { questions, questionsFlags } from "../data/question-data";
-import { makeElement, makeInputEl, saveToLocalStorage, sel, showNotification, transitionContent } from "../utils/helpers";
+import { sentences } from "../practice";
+import { questions, questionsFlags } from "../../data/question-data";
+import { makeElement, makeInputEl, saveToLocalStorage, sel, showNotification, transitionContent } from "../../utils/helpers";
 
 
 export const  renderQuestions = () => {

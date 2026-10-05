@@ -1,8 +1,8 @@
-import { pastStories as importedPastStories } from "../data/the-past-data";
-import { pastFlags } from "../data/the-past-data";
-import { makeElement, saveToLocalStorage, sel, speak } from "../utils/helpers";
-import { sentences } from "./practice";
-import type { SentenceObj } from "../types/types";
+import { pastStories as importedPastStories } from "../../data/the-past-data";
+import { pastFlags } from "../../data/the-past-data";
+import { makeElement, saveToLocalStorage, sel, speak } from "../../utils/helpers";
+import { sentences } from "../practice";
+import type { SentenceObj } from "../../types/types";
 
 let pastStories = [...importedPastStories];
 const localStoragePastStories = localStorage.getItem('pastStories');
