@@ -150,14 +150,183 @@ export type SvoFlags = {
   correctAnswersCounter: number;
 }
 
-export type SvoSentenceObj = {
+type SvoSentenceObj = {
   words: SvoWord[],
   correct: boolean,
 }
 
-export type SvoWord = {
-  text: string,
-  color: string,
+type SvoWord = {
+  text: string;
+  color: string;
 }
 
 export type SvoSentenceGroup = SvoSentenceObj[][]
+
+// TO BE 
+
+export type ToBeFlags = {
+  currentQuestion: number;
+  currentNegation: number;
+  currentNegation2: number;
+  correctPossibilities: number;
+  currentSentence: number;
+  currentSentence2: number;
+  currentHint: number;
+  essay2Finished: boolean;
+}
+
+// I am using this inside a weakmap instead of assigning an object to an HTML element like I was doing in JS.
+export type PopupPronounButtonData = { 
+  pronounClicked: HTMLButtonElement; 
+  translation: string 
+}
+
+export type ClickedButton = { 
+  button: HTMLButtonElement; 
+  selected: boolean; 
+}
+
+// ====== subjectPronouns ======
+
+export type ToBeDataObj = {
+  subjectPronouns: SubjectPronouns;
+  verbToBe: SubjectPronouns;
+  contractions: SubjectPronouns;
+  translate: Translate;
+  translate2: Translate;
+  translate3: Translate;
+  translate4: Translate;
+  translate5: Translate5;
+  translate6: Translate6;
+  translate7: Translate7;
+  translate8: Translate8;
+  essay: EssayObj;
+  essay2: Essay2Obj;
+}
+
+export type SubjectPronouns = {
+  title: string;
+  pairs: Pair[];
+}
+
+export type Pair = {
+  english: string;
+  spanish: string;
+}
+
+// ====== verbToBe ======
+
+// (same as subjectPronouns)
+
+// ====== contractions ======
+
+// (same as subjectPronouns)
+
+// ====== translate 1-4 ======
+
+type Translate = {
+  title: string;
+  instructions: string;
+}
+
+// ====== translate 5 ======
+
+type Translate5 = {
+  title: string;
+  instructions: string;
+  sentences: Pair[];
+}
+
+// ====== translate 6 ======
+
+type Translate6 = {
+  title: string;
+  instructions: string;
+  sentences: Translate6Sentence[];
+}
+
+// type Translate6Sentences = {
+//   sentences: TranslateSentence[];
+// }
+
+type Translate6Sentence = {
+  statement: string;
+  question: string;
+  chunks: Chunk[];
+}
+
+// ====== translate 7 ======
+
+type Translate7 = {
+  title: string;
+  instructions: string;
+  negationData: NegationsObj[]
+}
+
+type NegationsObj = {
+  statement: string;
+  negations: Translate7Negations[];
+}
+
+type Translate7Negations = {
+  negation:string;
+  class: string;
+}
+
+// ====== translate 8 ======
+
+type Translate8 = {
+  title: string;
+  instructions: string;
+  sentences: Translate7SentenceObj[];
+}
+
+type Translate7SentenceObj = {
+  statement: string;
+  correctPossibilities: number;
+  negations: Translate8Negations[];
+}
+
+type Translate8Negations = {
+  negation: string;
+  correct: boolean;
+}
+
+// ====== essay ======
+
+type EssayObj = {
+  title: string;
+  instructions: string;
+  paragraph: ParagraphSentence[];
+}
+
+export type ParagraphSentence = {
+  text: string;
+  translation: string;
+  words: Words[];
+}
+
+type Words = {
+  word: string;
+  translation: string;
+}
+
+// ====== essay 2======
+
+type Essay2Obj = {
+  title: string;
+  instructions: string;
+  sentences: Essay2Sentence[];
+}
+
+type Essay2Sentence = {
+  spanish: string;
+  english: string;
+  english2: string;
+  hints: Hint[]
+}
+
+type Hint = {
+  word: string;
+  translation: string;
+}

@@ -13,6 +13,7 @@ import { renderRegVerbs } from "./pronunciation/reg-verbs";
 import { renderSWords } from "./pronunciation/s-words";
 import { renderPlurals } from "./pronunciation/plurals";
 import { renderSvo } from "./svo";
+import { renderToBe } from "./to-be";
 
 export const renderHeader = () => {
 
@@ -194,7 +195,8 @@ const handleBasicClick = () => {
 }
 
 const handleToBeClick = () => {
-  console.log('test');
+  toggleHeaderAndOverlay();
+  renderToBe();
 }
 
 const handleOverlayClick = () => {

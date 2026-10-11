@@ -11,22 +11,24 @@ export const selAll = <T extends HTMLElement = HTMLElement>(selector: string): N
   return document.querySelectorAll(selector) as NodeListOf<T>;
 };
 
-export const makeElement = <T extends HTMLElement = HTMLElement>(
-  elementTag: string,
+export const makeElement = <K extends keyof HTMLElementTagNameMap>(
+  elementTag: K,
   className: string,
   appendToEl: HTMLElement | null,
   textInside?: string,
   listenerFunctionName?: (event: MouseEvent) => void
-  ): T => {
-  const element = document.createElement(elementTag) as T;
-  
+): HTMLElementTagNameMap[K] => {
+  const element = document.createElement(elementTag);
+
   element.classList.add(className);
   if (appendToEl) appendToEl.append(element);
   if (textInside) element.innerText = textInside;
-  if (listenerFunctionName) element.addEventListener('click', listenerFunctionName);
+  if (listenerFunctionName) {
+    element.addEventListener('click', listenerFunctionName as EventListener);
+  }
 
   return element;
-}
+};
 
 export const  makeInputEl = (
   className: string, 
