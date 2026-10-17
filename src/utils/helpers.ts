@@ -85,14 +85,14 @@ export const  renderTopic = (data: CommonErrorsObj[]) => {
 
   const practiceEl = makeElement('div', 'practice-div', contentSection);
     const practiceTitleEl = makeElement('h3', 'practice-title-h3', practiceEl, 'Practice');
-    const practiceUl = makeElement('ul', 'practice-ul', practiceEl);
     data[0]!.practice.forEach(practiceSentence => {
-      const practiceLi = makeElement('li', 'practice-sentence-li', practiceUl);
-      const bulletEl = makeElement('span', 'practice-bullet', practiceLi, '◉');
-      makeElement('div', 'practice-sentence-div', practiceLi, practiceSentence.english);
+      const practiceItemWrapper = makeElement('div', 'practice-item-wrapper', practiceEl);
+      const bulletEl = makeElement('span', 'practice-bullet', practiceItemWrapper, '◉');
+      makeElement('div', 'practice-sentence-div', practiceItemWrapper, practiceSentence.english);
       
-      makeElement('button', 'add-to-practice-button', practiceLi, 'Add to practice', () => handleAddToPracticeClick(practiceSentence));
+      makeElement('button', 'add-to-practice-button', practiceItemWrapper, 'Add to practice', () => handleAddToPracticeClick(practiceSentence));
     });
+
 }
 
 

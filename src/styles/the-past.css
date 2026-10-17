@@ -31,6 +31,8 @@
   border: 3px solid #4A7FB5;
   left: 0;
   bottom: 100%;
+  /* bottom: 0;
+  top: 100%; */
   /* bottom: calc(100% + 4px); */
   position:absolute;
   z-index: 1;
@@ -47,6 +49,12 @@
   visibility: hidden;
   opacity: 0;
 }
+
+.past-popup-div.move-popup-down {
+  bottom: 0;
+  top: 100%;
+}
+
 
 .sentence-div {
   border: 1px solid var(--LIGHT-GRAY);

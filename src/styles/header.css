@@ -158,6 +158,125 @@ button:focus-visible {
   transform: scale(1);
 }
 
+.title {
+  grid-column: 1/5;
+}
+
+.incorrect-title {
+  margin: 0 0 5px 0;
+}
+
+.incorrect-div {
+  border: 1px solid rgb(209, 0, 0);
+  padding: 8px 15px;
+  border-radius: 10px;
+  grid-column: 1/5;
+}
+
+.incorrect-sentence {
+  margin: 0 0 0 10px;
+}
+
+.correct-title {
+  margin: 0 0 5px 0;
+}
+
+.correct-sentence {
+  margin: 0 0 0 10px;
+}
+
+.incorrect-x {
+  margin: 0 0 0 5px;
+  color:  rgb(209, 0, 0);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.correct-div {
+  border: 1px solid var(--COMMON-ERRORS-BLUE);
+  padding: 8px 15px;
+  border-radius: 10px;
+  grid-column: 1/5;
+}
+
+.correct-check-mark {
+  margin: 0 0 0 7px;
+  color:  var(--COMMON-ERRORS-BLUE);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.note-element-1 {
+  display: inline-block;
+  margin: 10px 5px 0 0;
+  font-weight: bold;
+}
+
+/* =========== PRACTICE SECTION ======= */
+
+.practice-div {
+  margin: 10px 0 0 0;
+  grid-column: 1/5;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.practice-item-wrapper {
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  box-shadow: 2px 2px 8px  var(--COMMON-ERRORS-BLUE);
+}
+
+.practice-bullet {
+  grid-column: 1/2;
+  font-size: .8rem;
+  align-self: end;
+}
+
+.practice-sentence-div {
+  padding: 4px 3px 4px 5px;
+  border-radius: 5px;
+  grid-column: 2/3;
+}
+
+.practice-item-wrapper > .add-to-practice-button {
+  grid-column: 2/3;
+ justify-self: start;
+}
+
+
+/* .practice-item-wrapper {
+  padding: 10px 5px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 5px;
+  box-shadow: 2px 2px 8px var(--COMMON-ERRORS-BLUE);
+}
+
+.practice-bullet {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: .8rem;
+  align-self: end;
+}
+
+.practice-sentence-div {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  padding: 4px 3px 4px 5px;
+  border-radius: 5px;
+}
+
+.add-to-practice-button {
+  grid-column: 2;
+  grid-row: 2;
+} */
+
 .menu-button {
   width: 35px;
   height: 40px;

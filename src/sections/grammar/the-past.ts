@@ -3,6 +3,11 @@ import { pastFlags } from "../../data/the-past-data";
 import { makeElement, saveToLocalStorage, sel, speak } from "../../utils/helpers";
 import { sentences } from "../practice";
 import type { SentenceObj } from "../../types/types";
+import correctSoundFile from '../../../src/sounds/correct.mp3';
+import incorrectSoundFile from '../../../src/sounds/incorrect.mp3';
+
+const correctSound = new Audio(correctSoundFile);
+const incorrectSound = new Audio(incorrectSoundFile);
 
 let pastStories = [...importedPastStories];
 const localStoragePastStories = localStorage.getItem('pastStories');
@@ -14,7 +19,7 @@ if (localStoragePastStories) {
 export const renderPast = () => {
   // flags.currentSection = "Common Errors"
   // toggleLinkStyles();
-  const contentSection = sel('.content-section');
+  const contentSection = sel<HTMLDivElement>('.content-section');
   contentSection.innerHTML = '';
     // transitionContent(contentSection, 'scale-up', 'scale-down');
   const storyWrapper = makeElement('div', 'story-wrapper', contentSection);
@@ -41,6 +46,7 @@ export const renderPast = () => {
       popupEl.classList.add('invisible');
       if (sentence.done === false) {
         sentenceEl.addEventListener('mouseenter', handleSentenceMouseenter);
+        sentenceEl.addEventListener('click', handleSentenceMouseenter);
       }
       sentenceEl.addEventListener('mouseleave', handleSentenceMouseleave);
     });
@@ -50,25 +56,39 @@ export const renderPast = () => {
     const previousStoryButton = makeElement('button', 'previous-story-button', storyControlsWrapper, '⬅️ \u00A0Previous Story', handlePreviousStoryButtonClick);
     const nextStoryButton = makeElement('button', 'next-story-button', storyControlsWrapper, 'Next Story \u00A0 ➡️', handleNextStoryButtonClick);
     const resetStoryButton = makeElement('button', 'reset-story-button', storyControlsWrapper, 'Reset', handleResetStoryButtonClick);
+
+    addListenerToContentSection(contentSection);
 }
+
+const addListenerToContentSection = (contentSection: HTMLDivElement) => {
+  contentSection.addEventListener('click', (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.sentence-div')) {
+      contentSection.querySelectorAll('.past-popup-div').forEach(popup => {
+        popup.classList.add('invisible');
+      });
+    };
+  });
+};
 
 const handleSentenceMouseenter = (event: MouseEvent) => {
   const sentenceEl = event.target as HTMLElement;
-  // console.log(sentenceEl.dataset.id);
   if (sentenceEl.matches('.sentence-div')) {
-    // console.log(event.target);
-    // pastFlags.currentSentence = event.target.dataset.id;
     pastFlags.currentSentence = Number(sentenceEl.dataset.id);
-    // const popupEl = sel<HTMLDivElement>('.popup-div');
     const popupEl = sentenceEl.querySelector('.past-popup-div') as HTMLDivElement;
+    if (!popupEl.classList.contains('invisible')) return;
     popupEl.innerHTML = '';
+    popupEl.classList.remove('move-popup-down');
     const currentSentence = pastStories[pastFlags.currentStory]!.sentences[pastFlags.currentSentence];
-
     currentSentence!.translations.forEach(translation => {
-        const choicesEl = makeElement('div', 'choices-div', popupEl, translation);
-        choicesEl.addEventListener('click', handleChoiceClick);
-    });     
+      const choicesEl = makeElement('div', 'choices-div', popupEl, translation);
+      choicesEl.addEventListener('click', handleChoiceClick);
+    });  
     popupEl.classList.remove('invisible');
+    const popupRect = popupEl.getBoundingClientRect();
+    if (popupRect.top < 0) {
+      popupEl.classList.add('move-popup-down');
+    }   
   }
 }
 
@@ -96,7 +116,7 @@ const handlePopupElMouseleave = (event: MouseEvent) => {
 }
 
 const handleChoiceClick = (event: MouseEvent) => {
-  const contentSection = sel('.content-section');
+  // const contentSection = sel('.content-section');
   const choicesEl = event.target as HTMLDivElement;
   const sentenceEl = choicesEl.closest('.sentence-div') as HTMLDivElement | null;
   const chosenTranslation = choicesEl.innerText;
@@ -110,6 +130,7 @@ const handleChoiceClick = (event: MouseEvent) => {
     sentenceEl.classList.add('show-check');
     // showNotification('Correct! 🎉 🥳', contentSection, 70, 85);
     speak(correct);
+    correctSound.play();
     currentSentence!.done = true;
     if (currentSentence!.toPractice === true){
       currentSentence!.toPractice = false;
@@ -119,6 +140,7 @@ const handleChoiceClick = (event: MouseEvent) => {
     savePastStoriesToLocalStorage();
   } else {
     sentenceEl!.classList.add('show-x');
+    incorrectSound.play();
     // showNotification('Try again...', contentSection, 70, 85);
     addToPracticeSuggestions();
     currentSentence!.toPractice = true;
