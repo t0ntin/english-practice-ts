@@ -11,7 +11,7 @@ export const renderSvo = () => {
   const personEl = makeElement('div', 'person-div', tableWrapper1, 'Person');
   const actionEl = makeElement('div', 'action-div', tableWrapper1, 'Action');
   const whatEl = makeElement('div', 'what-div', tableWrapper1, 'What');
-  const otherInfoEl = makeElement('div', 'other-info-div', tableWrapper1, 'Other information');
+  const otherInfoEl = makeElement('div', 'other-info-div', tableWrapper1, 'Other info.');
 
   const tableWrapper2 = makeElement('div', 'table-wrapper-2', tableContainer);
   const personEl2 = makeElement('div', 'person-2-div', tableWrapper2);
@@ -54,7 +54,7 @@ const handleAnswer = (userAnswer: boolean) => {
   const answer = svoSentences[svoFlags.currentGroupIndex]![svoFlags.currentSentenceIndex]!.correct;
   if (userAnswer === true && answer === true || userAnswer === false && answer === false) {
     updateRightAnswersCounter();
-    showNotification('Correct!', contentSection, 55, 40);
+    showNotification('Correct!', contentSection, 55, 45);
     if (svoFlags.currentSentenceIndex === svoSentences[svoFlags.currentGroupIndex]!.length - 1) {
       goToNextGroup();
       
@@ -68,7 +68,7 @@ const handleAnswer = (userAnswer: boolean) => {
   };
 
   if (userAnswer === true && answer === false) {
-    showNotification('That one is incorrect!', contentSection, 45, 45);
+    showNotification('That one is incorrect!', contentSection, 55, 45);
         if (svoFlags.currentSentenceIndex === svoSentences[svoFlags.currentGroupIndex]!.length - 1) {
       goToNextGroup();
 

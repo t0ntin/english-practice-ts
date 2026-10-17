@@ -28,7 +28,7 @@ export const renderPlurals = () => {
     const listStepEl = makeElement('p', 'list-step', listLi, element.step);
     const practiceContentWrapper = makeElement('div', 'practice-content-div', listLi);
     const practiceContentEl = makeElement('p', 'practice-content-p', practiceContentWrapper, element.practiceContent.join(', '));
-    const speakButton = makeElement('button', 'speak-button', practiceContentWrapper, '📢 \u00A0 Play it', handleSpeakButtonClick);
+    const speakButton = makeElement('button', 'speak-button', practiceContentWrapper, '▶️ \u00A0 Play', handleSpeakButtonClick);
   });
 };
 

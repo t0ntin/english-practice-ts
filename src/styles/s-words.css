@@ -1,0 +1,57 @@
+.s-words-title {
+  grid-column: 1/5;
+}
+
+.top-text-div {
+  grid-column: 1/5;
+}
+
+.steps-ol {
+  margin: 0 0 0 10px;
+  grid-column: 1/5;
+}
+
+.practice-content-div {
+  margin: 0 0 0 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.top-text-div > :first-child{
+  margin: 15px 0 10px 0;
+
+  color: rgb(209, 0, 0);
+}
+
+.top-text-div > p {
+  margin: 0 0 0 10px;
+}
+
+.top-text-div > :last-child {
+  margin: 20px 0 0 0;
+}
+
+.list-li {
+  margin: 0 0 13px 0;
+  padding: 10px;
+  box-shadow: 2px 2px 8px  var(--COMMON-ERRORS-BLUE);
+  
+}
+
+.list-step {
+  margin: 0 0 5px 5px;
+  font-weight: bold;
+}
+
+.practice-content-div {
+  display: flex;
+  align-items: center;
+}
+
+.practice-content-div > .speak-button {
+  padding: 5px 10px;
+  height: 33px;
+  font-size: 1rem;
+  min-width: 91px;
+  flex-shrink: 0;
+}

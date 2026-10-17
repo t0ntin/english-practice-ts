@@ -13,7 +13,6 @@ export const renderRegVerbs = () => {
   const contentSection = sel('.content-section');
   contentSection.innerHTML = '';
   // transitionContent(contentSection, 'scale-up', 'scale-down');
-  const mainSection2 = sel('.main-section-2');
   const regVerbsTitleEl = makeElement('h2', 'reg-verbs-title-h2', contentSection, 'Pronunciation of regular verbs (-d, -ed)');
   const allVerbsWrapper = makeElement('div', 'all-verbs-wrapper', contentSection);
 

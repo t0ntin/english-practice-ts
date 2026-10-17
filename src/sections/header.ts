@@ -16,7 +16,6 @@ import { renderSvo } from "./svo";
 import { renderToBe } from "./to-be";
 
 export const renderHeader = () => {
-
   const practiceButton = sel('.practice-button');
   practiceButton.addEventListener('click', handlePracticeButtonClick);
   const grammarButton = sel('.grammar-button');
