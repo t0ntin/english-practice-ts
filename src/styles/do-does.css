@@ -88,9 +88,9 @@
 .english-sentence-container {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 8px;
-  flex-wrap: nowrap;
 }
 
 
@@ -141,6 +141,22 @@
   gap: 30px;
 }
 
+.option-buttons-container {
+  max-width: 592px;
+  margin: 15px 0 0 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  grid-column: 1/5;
+  justify-self: center;  
+  align-self: center;    
+}
+
+
+.option-buttons-container > .reset-button {
+  background-color: red;
+}
+
 .hidden {
   display: none;
 }
@@ -181,3 +197,6 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+
+

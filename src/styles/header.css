@@ -22,6 +22,7 @@
   --BOX-SHADOW-TWO: 2px 5px 10px rgba(127, 127, 127, 0.45);
   --TABLE-BACKGROUND-COLOR: rgb(99, 0, 0);
   --LIGHT-GRAY:rgb(97, 97, 97);
+  --DISABLED-GRAY:rgb(63, 63, 63);
 }
 
 html {
@@ -125,10 +126,14 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  background-color: var(--DISABLED-GRAY);
+}
+
 .ul-element {
-  /* display: flex;
-  flex-direction: column;
-  gap: 8px; */
   list-style: square;
 }
 

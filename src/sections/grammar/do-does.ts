@@ -19,26 +19,26 @@ export function renderDoDoes() {
   // flags.currentSection = "Common Errors"
   // toggleLinkStyles();
   const sectionOne = makeElement('div', 'section-one', contentSection);
-  const subjectSectionEl = makeElement<HTMLDivElement>('div', 'subject-section', sectionOne)
-  const verbSectionEl = makeElement<HTMLDivElement>('div', 'verb-section', sectionOne)
-  const objectSectionEl = makeElement<HTMLDivElement>('div', 'object-section', sectionOne)
+  const subjectSectionEl = makeElement('div', 'subject-section', sectionOne)
+  const verbSectionEl = makeElement('div', 'verb-section', sectionOne)
+  const objectSectionEl = makeElement('div', 'object-section', sectionOne)
 
   const allSentenceContainer = makeElement('section', 'all-sentence-container', contentSection)
 
-  const chosenSentEl = makeElement<HTMLDivElement>('div', 'chosen-sentence-container', contentSection)
+  const chosenSentEl = makeElement('div', 'chosen-sentence-container', contentSection)
 
   const optionButtonsCont = makeElement('div', 'option-buttons-container', contentSection)
 
   const resetButton = makeElement('button', 'reset-button', optionButtonsCont, 'Reset');
 
-  const typeModeBtn = makeElement<HTMLButtonElement>('button', 'type-mode-button', optionButtonsCont, 'Type it in')
+  const typeModeBtn = makeElement('button', 'type-mode-button', optionButtonsCont, 'Type it in')
   typeModeBtn.disabled = true;
 
-  const coverAnswersButton = makeElement<HTMLButtonElement>('button', 'cover-answers-button', optionButtonsCont, 'Cover answers')
+  const coverAnswersButton = makeElement('button', 'cover-answers-button', optionButtonsCont, 'Cover answers')
   coverAnswersButton.disabled = true;
   coverAnswersButton.addEventListener('click', handleCoverAnsClick);
 
-  const showHintsButton = makeElement<HTMLButtonElement>('button', 'show-hints-button', optionButtonsCont, 'Show hints')
+  const showHintsButton = makeElement('button', 'show-hints-button', optionButtonsCont, 'Show hints')
   showHintsButton.disabled = true;
   
   subjects.forEach(subject  => {
@@ -219,7 +219,7 @@ function handleCoverAnsClick(event: MouseEvent) {
   if (coverAnswersButton.matches('.cover-answers-button')){ 
     pickSentence();
   }
-  coverAnswersButton.disabled = false;
+  coverAnswersButton.disabled = true;
 }
 
 function handleShowHints(event: MouseEvent) {
