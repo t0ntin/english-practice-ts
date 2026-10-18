@@ -1,6 +1,6 @@
 import { pastStories as importedPastStories } from "../../data/the-past-data";
 import { pastFlags } from "../../data/the-past-data";
-import { makeElement, saveToLocalStorage, sel, speak } from "../../utils/helpers";
+import { makeElement, saveToLocalStorage, sel, showNotification, speak } from "../../utils/helpers";
 import { sentences } from "../practice";
 import type { SentenceObj } from "../../types/types";
 import correctSoundFile from '../../../src/sounds/correct.mp3';
@@ -159,10 +159,9 @@ const addToPracticeSuggestions = () => {
 }
 
 const handleAddToPracticeClick = (event: MouseEvent) => {
+  const contentSection = sel('.content-section');
   const addButton = event.target as HTMLButtonElement;
   const prevEl = addButton.previousElementSibling as HTMLSpanElement | null;
-  console.log(addButton);
-  // const contentSection = sel('.content-section');
   if (!prevEl) return;
   const englishSentence = prevEl.dataset.english;
   const spanishSentence = prevEl.innerText;
@@ -171,7 +170,7 @@ const handleAddToPracticeClick = (event: MouseEvent) => {
   const obj: SentenceObj = {sentence: englishSentence, translation: spanishSentence, isArchived: false};
   sentences.push(obj);
   saveToLocalStorage();
-  // showNotification('Sentence added.', contentSection, 70, 85)
+  showNotification('Sentence added.', contentSection, 55, 45)
 }
 
 const handlePreviousStoryButtonClick = () => {

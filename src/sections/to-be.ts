@@ -254,12 +254,18 @@ const createPopupAndOverlay = () => {
   if (!choicePopupEl) {
     choicePopupEl = makeElement('div', 'choice-popup-div', document.body); 
   }
+    choicePopupEl.classList.add('hidden');
+  console.log(choicePopupEl.className);
+console.log(getComputedStyle(choicePopupEl).display);
   if (!clearOverlay) {
     clearOverlay = makeElement('div', 'clear-overlay', document.body, '', handleClearOverlayClick); 
   }
   if (!storyPopupEl) {
     storyPopupEl = makeElement('div', 'story-popup', document.body); 
   }
+    storyPopupEl.classList.add('hidden');
+
+
 }
 
 const popupButtonData = new WeakMap<HTMLButtonElement, PopupPronounButtonData>();

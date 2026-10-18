@@ -3,10 +3,13 @@
   /* width: 600px; */
   grid-column: 1/5;
   grid-row: 1/2;
-  justify-self: center;
+  /* justify-self: center; */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  
   gap: 30px;
+  /* border: 1px solid red; */
 }
 
 .table-wrapper-1 {
@@ -94,10 +97,9 @@
 }
 
 .button-wrapper {
-  /* margin: 30px 0 30px 0; */
+  margin: 30px 0 0 0;
   grid-column: 1/5;
   grid-row: 2/3;
-  place-self: start center ;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -108,9 +110,9 @@
 }
 
 .counter-wrapper {
+  margin: 150px 0 0 0;
   grid-column: 2/4;
   grid-row: 3/4;
-  place-self: start center;
 }
 
 .score-span {

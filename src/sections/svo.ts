@@ -19,11 +19,11 @@ export const renderSvo = () => {
   const whatEl2 = makeElement('div', 'what-2-div', tableWrapper2);
   const otherInfoEl2 = makeElement('div', 'other-info-2-div', tableWrapper2);
 
-  const buttonWrapper = makeElement('div', 'button-wrapper', contentSection, 'Is this sentence correct?');
+  const buttonWrapper = makeElement('div', 'button-wrapper', tableContainer, 'Is this sentence correct?');
   const yesButton = makeElement('button', 'yes-button', buttonWrapper, 'Yes', () => handleAnswer(true));
   const noButton = makeElement('button', 'no-button', buttonWrapper, 'No', () => handleAnswer(false));
 
-  const counterWrapper = makeElement('div', 'counter-wrapper', contentSection);
+  const counterWrapper = makeElement('div', 'counter-wrapper', tableContainer);
   const scoreEl = makeElement('span', 'score-span', counterWrapper, 'Score: ')
   const rightAnswersEl = makeElement('span', 'right-answers-span', counterWrapper, '0');
   const slashEl = makeElement('span', 'slash-span', counterWrapper,'/');

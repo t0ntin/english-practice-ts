@@ -1,6 +1,6 @@
 import { showOverlay } from "../sections/header";
 import { sentences } from "../sections/practice";
-import type { CommonErrorsObj } from "../types/types";
+import type { CommonErrorsObj, PracticeSentence } from "../types/types";
 
 
 export const sel = <T extends HTMLElement>(className: string) => {
@@ -95,9 +95,16 @@ export const  renderTopic = (data: CommonErrorsObj[]) => {
 
 }
 
-
-const handleAddToPracticeClick = (practiceSentence:object) => {
-  console.log(practiceSentence);
+const handleAddToPracticeClick = (practiceSentence:PracticeSentence) => {
+  const contentSection = sel('.content-section');
+  const sentenceObj = {
+    sentence: practiceSentence.english,
+    translation: practiceSentence.spanish,
+    isArchived: false,
+  }
+  sentences.push(sentenceObj);
+  saveToLocalStorage();
+  showNotification('Sentence added.', contentSection, 45, 45);
 }
 
 export const toggleHeaderAndOverlay = () => {

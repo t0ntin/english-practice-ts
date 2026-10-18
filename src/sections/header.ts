@@ -14,6 +14,7 @@ import { renderSWords } from "./pronunciation/s-words";
 import { renderPlurals } from "./pronunciation/plurals";
 import { renderSvo } from "./svo";
 import { renderToBe } from "./to-be";
+import { headerFlags } from "../data/header-data";
 
 export const renderHeader = () => {
   const practiceButton = sel('.practice-button');
@@ -86,7 +87,7 @@ export const renderHeader = () => {
   renderTopic(suggestData);
 }
 
-const handlePracticeButtonClick = () => {
+const handlePracticeButtonClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay()
   renderPracticeSection();
   sentences.forEach(sentence => {
@@ -94,6 +95,7 @@ const handlePracticeButtonClick = () => {
       renderSentences(sentence);
     }
   })
+  changeButtonStyle(event)
 }
 
 const handleMenuButtonClick = () => {
@@ -113,95 +115,122 @@ const handleMenuButtonClick = () => {
 };
 
 const handleGrammarClick = () => {
-  console.log('test');
+  const grammarUl = sel('.grammar-ul');
+  grammarUl.classList.toggle('collapse');
 }
 
-const handleSuggestClick = () => {
+const handleSuggestClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay()
   renderTopic(suggestData);
+  changeButtonStyle(event)
 }
 
-const handleAdviceClick = () => {
+const handleAdviceClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderTopic(adviceData);
+  changeButtonStyle(event)
 }
 
-const handleConjugationClick = () => {
+const handleConjugationClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderTopic(conjugationData);
+  changeButtonStyle(event)
 }
 
-const handleObjectPlusInfClick = () => {
+const handleObjectPlusInfClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderTopic(objectPlusInfData);
+  changeButtonStyle(event)
 }
 
-const handleToHaveClick = () => {
+const handleToHaveClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderTopic(toHaveData);
+  changeButtonStyle(event)
 }
 
-const handleModalsClick = () => {
+const handleModalsClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderTopic(modalsData);
+  changeButtonStyle(event)
 }
 
-const handleQuestionsClick = () => {
+const handleQuestionsClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderQuestions();
+  changeButtonStyle(event)
 }
 
-const handleDoDoesClick = () => {
+const handleDoDoesClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderDoDoes();
+  changeButtonStyle(event)
 }
 
-const handlePastClick = () => {
+const handlePastClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderPast();
+  changeButtonStyle(event)
 }
 
 const handlePronunciationClick = () => {
-  console.log('test');
+  const pronunciationUl = sel('.pronunciation-ul');
+  pronunciationUl.classList.toggle('collapse');
 }
 
-const handleRegVerbsClick = () => {
+const handleRegVerbsClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderRegVerbs();
+  changeButtonStyle(event)
 }
 
-const handleSWordsClick = () => {
+const handleSWordsClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderSWords();
+  changeButtonStyle(event)
 }
 
-const handlePluralsClick = () => {
+const handlePluralsClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderPlurals();
+  changeButtonStyle(event)
 }
 
 const handleWordOrderClick = () => {
-  console.log('test');
+  const wordOrderUl = sel('.word-order-ul');
+  wordOrderUl.classList.toggle('collapse');
 }
 
-const handleSvoClick = () => {
+const handleSvoClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderSvo();
+  changeButtonStyle(event)
 }
 
 const handleBasicClick = () => {
-  console.log('test');
+  const basicUl = sel('.basic-ul');
+  basicUl.classList.toggle('collapse');
 }
 
-const handleToBeClick = () => {
+const handleToBeClick = (event: MouseEvent) => {
   toggleHeaderAndOverlay();
   renderToBe();
+  changeButtonStyle(event)
 }
 
 const handleOverlayClick = () => {
   const overlay = sel('.overlay');
   overlay.classList.remove('visible-overlay');
   onOverlayClose();
+}
+
+const changeButtonStyle = (event: MouseEvent) => {
+  if (headerFlags.lastSelectedElement) {
+    headerFlags.lastSelectedElement.classList.remove('selected');
+  }
+  const clickedButton = event.target as HTMLButtonElement;
+  headerFlags.lastSelectedElement = clickedButton;
+  clickedButton.classList.add('selected');
 }
 
 let onOverlayClose: () => void = () => {};

@@ -123,7 +123,7 @@
   box-shadow: 0 0 8px rgba(90, 169, 255, 0.35);
 }
 
-.check-sentence-button, .hint1-button, .hint2-button, .wrapper1-div > .add-to-practice-button, .previous-button, .next-button, .show-answer-button {
+/* .check-sentence-button, .hint1-button, .hint2-button, .wrapper1-div > .add-to-practice-button, .previous-button, .next-button, .show-answer-button {
   padding: 5px;
   font-size: 1rem;
   font-weight: 600;
@@ -145,7 +145,7 @@
 .check-sentence-button:active, .hint1-button:active, .hint2-button:active, .add-to-practice-button:active, .previous-button:active, .next-button:active, .show-answer-button:active {
   background-color: #3f3f3f;
   transform: scale(.96);
-}
+} */
 
 .check-sentence-button {
   margin: 0 0 15px 0;
