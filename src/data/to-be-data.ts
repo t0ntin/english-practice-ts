@@ -53,11 +53,11 @@ export const toBeData: ToBeDataObj = {
   },
   translate: {
     title: "Traduzca del inglés al español",
-    instructions: "Toque el boton y escoja la traduccion correcta."
+    instructions: "Toque el botón y escoja la traducción correcta."
   },
   translate2: {
     title: "Traduzca del español al inglés",
-    instructions: "Toque el boton y escoja la traduccion correcta."
+    instructions: "Toque el botón y escoja la traducción correcta."
   },
   translate3: {
     title: "Traduzca del inglés al español",
@@ -544,7 +544,7 @@ export const toBeData: ToBeDataObj = {
   },
   essay: {
     title: "Párrafo",
-    instructions: "Lea el siguiente párrafo. Toque las oraciones para escucharlas y buscar palabras desconocidas.",
+    instructions: "Lea el siguiente párrafo. Toque las oraciones para escucharlas y ver palabras desconocidas.",
     paragraph: [
       {
         text: "My name is John.", 

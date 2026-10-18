@@ -16,6 +16,68 @@ import { renderSvo } from "./svo";
 import { renderToBe } from "./to-be";
 import { headerFlags } from "../data/header-data";
 
+const loadSection = (section: string) => {
+    switch (section) {
+    case 'practice':
+      renderPracticeSection();
+      sentences.forEach(sentence => {
+        renderSentences(sentence);
+      })
+      break;
+    case 'suggestions':
+      renderTopic(suggestData);
+      break;
+    case 'advice':
+      renderTopic(adviceData);
+      break;
+    case 'conjugation':
+      renderTopic(conjugationData);
+      break;
+    case 'objectplusinf':
+      renderTopic(objectPlusInfData);
+      break;
+    case 'tohave':
+      renderTopic(toHaveData);
+      break;
+    case 'modals':
+      renderTopic(modalsData);
+      break;
+    case 'questions':
+      renderQuestions();
+      break;
+    case 'past':
+      renderPast();
+      break;
+    case 'dodoes':
+      renderDoDoes();
+      break;
+    case 'regverbs':
+      renderRegVerbs();
+      break;
+    case 'swords':
+      renderSWords();
+      break;
+    case 'plurals':
+      renderPlurals();
+      break;
+    case 'svo':
+      renderSvo();
+      break;
+    case 'tobe':
+      renderToBe();
+      break;
+  }
+}
+
+export const initialize = () => {
+  renderHeader();
+  window.addEventListener('popstate', (event: PopStateEvent) => {
+  const section = event.state?.section ?? 'suggestions';
+  loadSection(section);
+  changeButtonStyle(section);
+  });
+}
+
 export const renderHeader = () => {
   const practiceButton = sel('.practice-button');
   practiceButton.addEventListener('click', handlePracticeButtonClick);
@@ -85,17 +147,20 @@ export const renderHeader = () => {
   overlay.addEventListener('click', handleOverlayClick);
 
   renderTopic(suggestData);
+  history.pushState({ section: 'suggestions' }, '', '');
+
 }
 
-const handlePracticeButtonClick = (event: MouseEvent) => {
+const handlePracticeButtonClick = () => {
   toggleHeaderAndOverlay()
   renderPracticeSection();
+  history.pushState({ section: 'practice' }, '', '');
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {
       renderSentences(sentence);
     }
   })
-  changeButtonStyle(event)
+  changeButtonStyle('practice')
 }
 
 const handleMenuButtonClick = () => {
@@ -119,58 +184,67 @@ const handleGrammarClick = () => {
   grammarUl.classList.toggle('collapse');
 }
 
-const handleSuggestClick = (event: MouseEvent) => {
-  toggleHeaderAndOverlay()
+const handleSuggestClick = () => {
+  toggleHeaderAndOverlay();
   renderTopic(suggestData);
-  changeButtonStyle(event)
+  changeButtonStyle('suggestions');
+  history.pushState({ section: 'suggestions' }, '', '');
 }
 
-const handleAdviceClick = (event: MouseEvent) => {
+const handleAdviceClick = () => {
   toggleHeaderAndOverlay();
   renderTopic(adviceData);
-  changeButtonStyle(event)
+  changeButtonStyle('advice');
+  history.pushState({ section: 'advice' }, '', '');
 }
 
-const handleConjugationClick = (event: MouseEvent) => {
+const handleConjugationClick = () => {
   toggleHeaderAndOverlay();
   renderTopic(conjugationData);
-  changeButtonStyle(event)
+  changeButtonStyle('conjugation');
+  history.pushState({ section: 'conjugation' }, '', '');
 }
 
-const handleObjectPlusInfClick = (event: MouseEvent) => {
+const handleObjectPlusInfClick = () => {
   toggleHeaderAndOverlay();
   renderTopic(objectPlusInfData);
-  changeButtonStyle(event)
+  changeButtonStyle('objectplusinf');
+  history.pushState({ section: 'objectplusinf' }, '', '');
 }
 
-const handleToHaveClick = (event: MouseEvent) => {
+const handleToHaveClick = () => {
   toggleHeaderAndOverlay();
   renderTopic(toHaveData);
-  changeButtonStyle(event)
+  changeButtonStyle('tohave');
+  history.pushState({ section: 'tohave' }, '', '');
 }
 
-const handleModalsClick = (event: MouseEvent) => {
+const handleModalsClick = () => {
   toggleHeaderAndOverlay();
   renderTopic(modalsData);
-  changeButtonStyle(event)
+  changeButtonStyle('modals');
+  history.pushState({ section: 'modals' }, '', '');
 }
 
-const handleQuestionsClick = (event: MouseEvent) => {
+const handleQuestionsClick = () => {
   toggleHeaderAndOverlay();
   renderQuestions();
-  changeButtonStyle(event)
+  changeButtonStyle('questions');
+  history.pushState({ section: 'questions' }, '', '');
 }
 
-const handleDoDoesClick = (event: MouseEvent) => {
+const handleDoDoesClick = () => {
   toggleHeaderAndOverlay();
   renderDoDoes();
-  changeButtonStyle(event)
+  changeButtonStyle('dodoes');
+  history.pushState({ section: 'dodoes' }, '', '');
 }
 
-const handlePastClick = (event: MouseEvent) => {
+const handlePastClick = () => {
   toggleHeaderAndOverlay();
   renderPast();
-  changeButtonStyle(event)
+  changeButtonStyle('past');
+  history.pushState({ section: 'past' }, '', '');
 }
 
 const handlePronunciationClick = () => {
@@ -178,22 +252,25 @@ const handlePronunciationClick = () => {
   pronunciationUl.classList.toggle('collapse');
 }
 
-const handleRegVerbsClick = (event: MouseEvent) => {
+const handleRegVerbsClick = () => {
   toggleHeaderAndOverlay();
   renderRegVerbs();
-  changeButtonStyle(event)
+  changeButtonStyle('regverbs');
+  history.pushState({ section: 'regverbs' }, '', '');
 }
 
-const handleSWordsClick = (event: MouseEvent) => {
+const handleSWordsClick = () => {
   toggleHeaderAndOverlay();
   renderSWords();
-  changeButtonStyle(event)
+  changeButtonStyle('swords');
+  history.pushState({ section: 'swords' }, '', '');
 }
 
-const handlePluralsClick = (event: MouseEvent) => {
+const handlePluralsClick = () => {
   toggleHeaderAndOverlay();
   renderPlurals();
-  changeButtonStyle(event)
+  changeButtonStyle('plurals');
+  history.pushState({ section: 'plurals' }, '', '');
 }
 
 const handleWordOrderClick = () => {
@@ -201,10 +278,11 @@ const handleWordOrderClick = () => {
   wordOrderUl.classList.toggle('collapse');
 }
 
-const handleSvoClick = (event: MouseEvent) => {
+const handleSvoClick = () => {
   toggleHeaderAndOverlay();
   renderSvo();
-  changeButtonStyle(event)
+  changeButtonStyle('svo');
+  history.pushState({ section: 'svo' }, '', '');
 }
 
 const handleBasicClick = () => {
@@ -212,10 +290,11 @@ const handleBasicClick = () => {
   basicUl.classList.toggle('collapse');
 }
 
-const handleToBeClick = (event: MouseEvent) => {
+const handleToBeClick = () => {
   toggleHeaderAndOverlay();
   renderToBe();
-  changeButtonStyle(event)
+  changeButtonStyle('tobe');
+  history.pushState({ section: 'tobe' }, '', '');
 }
 
 const handleOverlayClick = () => {
@@ -224,13 +303,75 @@ const handleOverlayClick = () => {
   onOverlayClose();
 }
 
-const changeButtonStyle = (event: MouseEvent) => {
+const changeButtonStyle = (sectionName: string) => {
   if (headerFlags.lastSelectedElement) {
     headerFlags.lastSelectedElement.classList.remove('selected');
   }
-  const clickedButton = event.target as HTMLButtonElement;
-  headerFlags.lastSelectedElement = clickedButton;
-  clickedButton.classList.add('selected');
+  if (sectionName === 'practice') {
+    const button = sel<HTMLButtonElement>('.practice-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'suggestions') {
+    const button = sel<HTMLButtonElement>('.suggestions-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'advice') {
+    const button = sel<HTMLButtonElement>('.advice-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'conjugation') {
+    const button = sel<HTMLButtonElement>('.conjugation-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'objectplusinf') {
+    const button = sel<HTMLButtonElement>('.objectplusinf-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'tohave') {
+    const button = sel<HTMLButtonElement>('.to-have-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'modals') {
+    const button = sel<HTMLButtonElement>('.modals-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'questions') {
+    const button = sel<HTMLButtonElement>('.questions-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'past') {
+    const button = sel<HTMLButtonElement>('.past-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'dodoes') {
+    const button = sel<HTMLButtonElement>('.do-does-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'regverbs') {
+    const button = sel<HTMLButtonElement>('.reg-verbs-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'swords') {
+    const button = sel<HTMLButtonElement>('.s-words-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'plurals') {
+    const button = sel<HTMLButtonElement>('.plurals-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'svo') {
+    const button = sel<HTMLButtonElement>('.svo-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+  if (sectionName === 'tobe') {
+    const button = sel<HTMLButtonElement>('.to-be-button');
+    addClassAndUpdateLastSelectedElement(button);
+  }
+}
+
+const addClassAndUpdateLastSelectedElement = (button: HTMLButtonElement) => {
+  button.classList.add('selected');
+  headerFlags.lastSelectedElement = button;
 }
 
 let onOverlayClose: () => void = () => {};

@@ -9,14 +9,12 @@
   align-items: center;
   
   gap: 30px;
-  /* border: 1px solid red; */
 }
 
 .table-wrapper-1 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  /* border: 1px solid white; */
   gap: 5px;
 }
 

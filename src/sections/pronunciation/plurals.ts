@@ -15,7 +15,7 @@ export const renderPlurals = () => {
   Given a word like <strong>garages</strong>.", students usually say "<strong>garage</strong>". Here's how you can fix that:
 </p>
 <h3> Practice</h3`;
-  const listOl = makeElement('ol', 'steps-ol', contentSection);
+  const listOl = makeElement('ol', 'plurals-steps-ol', contentSection);
   const listLi = makeElement('li', 'list-li', listOl);
     const listStepEl = makeElement('p', 'list-step', listLi, pluralsData[0]!.step);
     pluralsData[0]!.practiceContent.forEach(pair => {

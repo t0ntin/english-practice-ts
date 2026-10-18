@@ -3,16 +3,16 @@
 }
 
 .first-section-div {
-  /* width: 100%; */
-  /* display: flex; */
   grid-column: 1/5;
-  /* justify-content: center; */
-  /* gap: 5px; */
+}
+
+.title-h2 {
+  margin: 0 0 10px 0;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
 }
 
 table {
   width: 100%;
-  /* border-collapse: separate; */
   border-spacing: 0;
   font-family: Arial, sans-serif;
   border-radius: 5px;
@@ -20,7 +20,7 @@ table {
 }
 
 th {
-  background-color: blue;
+  background-color: rgb(39, 39, 39);
   color: white;
   padding: 5px;
   text-align: left;
@@ -36,8 +36,12 @@ tr:nth-child(even) {
   background-color: rgb(39, 39, 39);
 }
 
+.translate-title-h2, .essay-title-h2, .essay-title-2-h2 {
+  margin: 0 0 10px 0;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+}
 /* ==========  BUTTONS ============ */
-
+/* 
 .pronoun-button, .practice-pronoun-button, .popup-pronoun-button, .practice-sentence-button, .eng-to-span-button, .span-to-eng-button, .popup-sentence-translation, .check-question-button, .next-question-button, .negation-button, .next-negation-button, .previous-negation-button, .negation-button-2, .previous-negation-button-2, .next-negation-button-2, .essay-sentence-button, .check-button, .show-hint-button, .next-sentence-button {
   padding: 10px 15px;
   background-color: var(--COMMON-ERRORS-BLUE);
@@ -60,7 +64,7 @@ tr:nth-child(even) {
 .pronoun-button:focus, .practice-pronoun-button:focus, .popup-pronoun-button:focus, .practice-sentence-button:focus, .eng-to-span-button:focus, .span-to-eng-button:focus, .popup-sentence-translation:focus, .check-question-button:focus, .next-question-button:focus, .negation-button:focus, .next-negation-button:focus, .previous-negation-button:focus, .negation-button-2:focus, .previous-negation-button-2:focus, .next-negation-button-2:focus, .essay-sentence-button:focus, .check-button:focus, .show-hint-button:focus, .next-sentence-button:focus {
   outline: 2px solid #333;
   outline-offset: 2px;
-}
+} */
 
 .pronoun-button:disabled, .practice-pronoun-button:disabled, .popup-pronoun-button:disabled, .practice-sentence-button:disabled {
   background-color: #cccccc;
@@ -95,8 +99,8 @@ tr:nth-child(even) {
 
 .wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f, .wrapper-3-g, .wrapper-3-h, .wrapper-3-i, .wrapper-3-j {
   padding: 0 0 0 8px;
-  border-left: 1px solid darkgray;
-  border-radius: 5px;
+  border-left: 2px solid var(--COMMON-ERRORS-BLUE);
+  border-radius: 10px;
 }   
 
 .trans-div-1, .trans-div-2, .trans-div-5, .trans-div-6, .trans-div-9 {

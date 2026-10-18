@@ -1,3 +1,4 @@
+import { headerFlags } from "../data/header-data";
 import { showOverlay } from "../sections/header";
 import { sentences } from "../sections/practice";
 import type { CommonErrorsObj, PracticeSentence } from "../types/types";

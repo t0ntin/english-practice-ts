@@ -95,12 +95,12 @@ export const renderToBe = () => {
         const nextNegationButton2 = makeElement('button', 'next-negation-button-2', transWrapper17, 'Siguiente', handleNextNegationButtonClick2);
         renderNegations2(statementEl2, transWrapper16);
     const wrapper3i = makeElement('div', 'wrapper-3-i', thirdSectionWrapper);
-      const essayTitleEl = makeElement('h2', 'esay-title-h2', wrapper3i, toBeData.essay.title);
+      const essayTitleEl = makeElement('h2', 'essay-title-h2', wrapper3i, toBeData.essay.title);
       const essayInstructionsEl = makeElement('p', 'essay-instructions-p', wrapper3i, toBeData.essay.instructions);
       const essayWrapper1 = makeElement('div', 'essay-div-1', wrapper3i);
       renderEssay(essayWrapper1);
     const wrapper3j = makeElement('div', 'wrapper-3-j', thirdSectionWrapper);
-      const essayTitleEl2 = makeElement('h2', 'esay-title-2-h2', wrapper3j, toBeData.essay2.title);
+      const essayTitleEl2 = makeElement('h2', 'essay-title-2-h2', wrapper3j, toBeData.essay2.title);
       const essayInstructionsEl2 = makeElement('p', 'essay-instructions-2-p', wrapper3j, toBeData.essay2.instructions);
       const essayWrapper2 = makeElement('div', 'essay-div-2', wrapper3j);
       const outputEl2 = makeElement('div', 'output-2-div', wrapper3j);
@@ -738,7 +738,7 @@ const toggleButtonState = (element: NodeListOf<HTMLButtonElement>) => {
 }
 
 const renderTable = (tableData: SubjectPronouns) => {
-  let html = `<h2>${tableData.title}</h2>`;
+  let html = `<h2 class="title-h2">${tableData.title}</h2>`;
   html += `<table border="1" cellpadding="8" style="border-collapse: collapse; margin-bottom: 20px; width: 100%;">`;
   html += `<thead><tr><th>English</th><th>Spanish</th></tr></thead>`;
   html += `<tbody>`;

@@ -22,7 +22,7 @@ export const  renderQuestions = () => {
   const wrapper1 = makeElement('div', 'wrapper1-div', contentSection);
 
     const instructionsEl = makeElement('p', 'instructions-p', wrapper1, currentQuestion.instruction);
-    // transitionContent(instructionsEl, 'slide1', 'slide2');
+    transitionContent(instructionsEl, 'slide1', 'slide2');
     const partOfSpeechEl = makeElement('span', currentQuestion.role, instructionsEl, currentQuestion.partOfSpeech);
 
     const inputEl = makeInputEl('sentence-input', wrapper1, 'Type your question here...');
