@@ -81,7 +81,6 @@ const changeView = () => {
 
 const handleShowArchive = () => {
   const sentencesContainerOne = sel('.sentences-container-one');
-  const shuffleSentencesButton = sel('.shuffle-sentences-button');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (sentence.isArchived) {
@@ -94,7 +93,6 @@ const handleShowArchive = () => {
 
 const handleShowActive = () => {
   const sentencesContainerOne = sel('.sentences-container-one');
-  const shuffleSentencesButton = sel('.shuffle-sentences-button');
   sentencesContainerOne.innerHTML = '';
   sentences.forEach(sentence => {
     if (!sentence.isArchived) {

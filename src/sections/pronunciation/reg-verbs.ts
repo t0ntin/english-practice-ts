@@ -1,5 +1,10 @@
 import { allVerbs, regVerbData, regVerbFlags as importedRegVerbFlags } from "../../data/reg-verbs-data";
 import { sel, makeElement, speak, showNotification } from "../../utils/helpers";
+import correctSoundFile from '../../sounds/correct.mp3';
+import incorrectSoundFile from '../../sounds/incorrect.mp3';
+
+const correctSound = new Audio(correctSoundFile);
+const incorrectSound = new Audio(incorrectSoundFile);
 
 let regVerbFlags = {...importedRegVerbFlags};
 const localStorageRegVerbData = localStorage.getItem('regVerbFlags')
@@ -32,7 +37,7 @@ export const renderRegVerbs = () => {
       
   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
-    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match this underlined consonant sound to the to one of the verbs on the left. Example: Talk and walk end in a "k", so you would drag the word Talked into Walked. The last sound of laugh is an "f", not a "g" or an "h". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
+    const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match this underlined consonant sound to the to one of the verbs above. Example: Talk and walk end in a "k", so you drag  Talked into Walked. The last sound of laugh is an "f", not a "g" or an "h".');
     const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
       const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
       const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
@@ -40,6 +45,39 @@ export const renderRegVerbs = () => {
 
   initialize();
 }
+// export const renderRegVerbs = () => {
+//   // flags.currentSection = "Common Errors"
+//   // toggleLinkStyles();
+//   const contentSection = sel('.content-section');
+//   contentSection.innerHTML = '';
+//   // transitionContent(contentSection, 'scale-up', 'scale-down');
+//   const regVerbsTitleEl = makeElement('h2', 'reg-verbs-title-h2', contentSection, 'Pronunciation of regular verbs (-d, -ed)');
+//   const allVerbsWrapper = makeElement('div', 'all-verbs-wrapper', contentSection);
+
+//   const mainVerbsWrapper = makeElement('div', 'main-verbs-wrapper', allVerbsWrapper);
+//   const note1El = makeElement('div', 'note-1', mainVerbsWrapper, 'Pronounce the "e":');
+//     regVerbData[0]?.mainVerbs1?.forEach(verb => {
+//       const verbEl = makeElement('div', 'verb-div', mainVerbsWrapper, verb);
+//       underlineLastConsonant(verbEl);
+//     })
+//     const otherVerbsWrapper = makeElement('div', 'other-verbs-wrapper', allVerbsWrapper);
+//     const note2El = makeElement('div', 'note-2', otherVerbsWrapper, 'Don\'t pronounce the "e":');
+
+//     regVerbData[0]?.mainVerbs2?.forEach((verb, i) => {
+//       const verbEl = makeElement('div', 'verb-div', otherVerbsWrapper, verb);
+//       underlineLastConsonant(verbEl);
+//     });
+      
+//   const currentVerbWrapper = makeElement('div', 'current-verb-wrapper', contentSection);
+//     const currentVerbEl = makeElement('span', 'current-verb-span', currentVerbWrapper);
+//     const instructionsEl = makeElement('div', 'instructions-div', currentVerbWrapper, 'Match this underlined consonant sound to the to one of the verbs on the left. Example: Talk and walk end in a "k", so you would drag the word Talked into Walked. The last sound of laugh is an "f", not a "g" or an "h". To practice with uncommon verbs, hit the Show Uncommon Verbs button.');
+//     const buttonWrapper = makeElement('div', 'button-wrapper-2', currentVerbWrapper); //Had to add a 2 to this because of a conflict with another element in the app.
+//       const commonVerbsButton = makeElement('button', 'common-verbs-button', buttonWrapper, 'Show Common Verbs', handleShowCommonVerbsClick);
+//       const uncommonVerbsButton = makeElement('button', 'uncommon-verbs-button', buttonWrapper, 'Show Uncommon Verbs', handleShowUncommonVerbsClick);
+//       const resetVerbsButton = makeElement('button', 'reset-verbs-button', buttonWrapper, 'Reset', handleResetVerbsClick);
+
+//   initialize();
+// }
 
 
 const initialize = () => {
@@ -59,7 +97,6 @@ const initialize = () => {
     // -------------------------
     currentVerbEl.addEventListener('dragstart', (event: DragEvent) => {
       const target = event.target as HTMLSpanElement;
-
       event.dataTransfer!.setData('text/plain', target.id);
       target.style.opacity = '0.5';
     });
@@ -68,7 +105,6 @@ const initialize = () => {
     // -------------------------
     currentVerbEl.addEventListener('dragend', (event: DragEvent) => {
       const target = event.target as HTMLSpanElement;
-
       target.style.opacity = '1';
     });
     // -------------------------
@@ -131,13 +167,13 @@ const initialize = () => {
 
       // Remove highlight from previous target
       if (highlightedVerb && highlightedVerb !== verbEl) {
-        highlightedVerb.style.backgroundColor = '#004489';
+        highlightedVerb.style.backgroundColor = '#0a4b2c';
         highlightedVerb = null;
       }
 
       // Highlight current target
-      if (verbEl && allVerbsWrapper.contains(verbEl)) {
-        verbEl.style.backgroundColor = '#007efcff';
+      if (verbEl) {
+        verbEl.style.backgroundColor = '#18bc6dff';
         highlightedVerb = verbEl;
       }
     });
@@ -165,7 +201,7 @@ const initialize = () => {
 
       // Reset highlighted target
       if (highlightedVerb) {
-        highlightedVerb.style.backgroundColor = '#004489';
+        highlightedVerb.style.backgroundColor = '#0a4b2c';
         highlightedVerb = null;
       }
 
@@ -197,7 +233,7 @@ const initialize = () => {
 
       currentVerbEl.classList.remove('mobile-dragging');
       if (highlightedVerb) {
-        highlightedVerb.style.backgroundColor = '#004489';
+        highlightedVerb.style.backgroundColor = 'red';
         highlightedVerb = null;
       }
 
@@ -218,31 +254,45 @@ const initialize = () => {
     // -------------------------
     allVerbsWrapper.addEventListener('dragover', (event: DragEvent) => {
       event.preventDefault();
-      const verbEl = event.target as HTMLDivElement;
+      
+      // Find the closest .verb-div, regardless of what child element we are hovering over
+      const target = event.target as HTMLElement;
+      const verbEl = target.closest('.verb-div') as HTMLDivElement | null;
 
-      if (verbEl.classList.contains('verb-div')) {
-        verbEl.style.backgroundColor = '#007efcff';
+      if (verbEl && allVerbsWrapper.contains(verbEl)) {
+        verbEl.style.backgroundColor = '#18bc6dff';
       }
     });
+
     // -------------------------
     // Drag leave
     // -------------------------
     allVerbsWrapper.addEventListener('dragleave', (event: DragEvent) => {
-      const verbEl = event.target as HTMLDivElement;
+      const target = event.target as HTMLElement;
+      const verbEl = target.closest('.verb-div') as HTMLDivElement | null;
 
-      if (verbEl.classList.contains('verb-div')) {
-        verbEl.style.backgroundColor = '#004489';
+      // Optional but recommended: Only remove the highlight if we are actually leaving the verb-div
+      // (prevents flickering when moving between the div and its inner span)
+      const relatedTarget = event.relatedTarget as HTMLElement | null;
+      if (verbEl && (!relatedTarget || !verbEl.contains(relatedTarget))) {
+         verbEl.style.backgroundColor = '#0a4b2c';
       }
     });
+
     // -------------------------
     // Drop
     // -------------------------
     allVerbsWrapper.addEventListener('drop', (event: DragEvent) => {
       event.preventDefault();
-      const verbEl = event.target as HTMLDivElement;
+      
+      // Use closest() to find the parent .verb-div even if the target is the span
+      const target = event.target as HTMLElement;
+      const verbEl = target.closest('.verb-div') as HTMLDivElement | null;
 
-      if (verbEl.matches('.verb-div')) {
-        verbEl.style.backgroundColor = '#004489';
+      // Check if we actually found a valid verb-div
+      if (verbEl && allVerbsWrapper.contains(verbEl)) {
+        verbEl.style.backgroundColor = '#0a4b2c';
+        
         // Drop animation
         verbEl.style.transform = 'scale(1.15)';
         verbEl.style.boxShadow = '0 0 15px white';
@@ -254,7 +304,11 @@ const initialize = () => {
 
         const data = event.dataTransfer!.getData('text/plain');
         const draggedElement = document.getElementById(data) as HTMLSpanElement;
-        checkVerb(verbEl, draggedElement, contentSection);
+        
+        // Make sure draggedElement isn't null before passing it
+        if (draggedElement) {
+            checkVerb(verbEl, draggedElement, contentSection);
+        }
       }
     });
 
@@ -270,7 +324,7 @@ const initialize = () => {
     const found = allVerbs[verbEl.innerText]!.some(isInArray);
     console.log(found);
     if (found) {
-      showNotification("That's right!", contentSection, 50, 63);
+      showNotification("That's right!", contentSection, 70, 50);
 
       if (regVerbFlags.currentVerbGroup === 'common') {
         regVerbFlags.currentVerbCommon++;
@@ -278,14 +332,20 @@ const initialize = () => {
         regVerbFlags.currentVerbUncommon++;
       }
       saveRegVerFlagsToLocalStorage();
-      speak(verbEl.textContent);
-      speak(draggedElement.textContent);
+      correctSound.play();
+      // speak(verbEl.textContent);
+      setTimeout(() => {
+        speak(draggedElement.textContent);
+        speak(verbEl.textContent)
+      }, 800);
 
     } else {
-
-      showNotification('Try again.', contentSection, 50, 63);
+      showNotification('Try again.', contentSection, 70, 50);
+      incorrectSound.play();
     }
-    switchVerbGroup(currentVerbEl);
+    setTimeout(() => {
+      switchVerbGroup(currentVerbEl);
+    }, 901);
   }
 };
 

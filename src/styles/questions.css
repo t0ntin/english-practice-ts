@@ -60,7 +60,7 @@
 
 .subject-2, .verb-2, .object-2, .prep-phrase, .frequency, .interrogative, .aux, .adverb {
   padding: 10px 15px;
-  font-size: clamp(0.9rem, 2.3vw, 1.2rem);
+  font-size: clamp(0.9rem, 2.3vw, 1.4rem);
   font-weight: bold;
   border-radius: 3px;
   align-content: center;

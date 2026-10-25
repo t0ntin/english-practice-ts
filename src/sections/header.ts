@@ -139,9 +139,8 @@ export const renderHeader = () => {
     const toBeLi = sel('.to-be-li');
       const toBeButton = makeElement('button', 'to-be-button', toBeLi, 'To be', handleToBeClick);
 
-    const mainSection = sel('.main-section');
-    const menuButton = makeElement('button', 'menu-button', mainSection, '', handleMenuButtonClick)
-      const contentSection = makeElement('div', 'content-section', mainSection);
+    const mainEl = sel('.main');
+    const menuButton = makeElement('button', 'menu-button', mainEl, '', handleMenuButtonClick)
 
   const overlay = sel('.overlay');
   overlay.addEventListener('click', handleOverlayClick);

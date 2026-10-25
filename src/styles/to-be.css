@@ -1,9 +1,8 @@
-*{
-  /* outline: 1px solid red; */
-}
-
 .first-section-div {
-  grid-column: 1/5;
+  width: 95%;
+  max-width: 95%;
+  grid-column: 1 / 5;
+  justify-self: center; 
 }
 
 .title-h2 {
@@ -39,6 +38,10 @@ tr:nth-child(even) {
 .translate-title-h2, .essay-title-h2, .essay-title-2-h2 {
   margin: 0 0 10px 0;
   font-size: clamp(1.2rem, 5vw, 1.5rem);
+}
+
+tr:first-child > td > .pronoun-button {
+  padding: 5px 15px;
 }
 /* ==========  BUTTONS ============ */
 /* 
@@ -94,7 +97,9 @@ tr:nth-child(even) {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  max-width: 100%;
   grid-column: 1/5;
+  justify-self: center;
 }
 
 .wrapper-3-a, .wrapper-3-b, .wrapper-3-c, .wrapper-3-d, .wrapper-3-e, .wrapper-3-f, .wrapper-3-g, .wrapper-3-h, .wrapper-3-i, .wrapper-3-j {
